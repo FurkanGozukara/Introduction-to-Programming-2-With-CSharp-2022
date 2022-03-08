@@ -1,0 +1,15 @@
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 2\lecture 2\bin\Debug\net6.0\lecture 2.exe
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 2\lecture 2\bin\Debug\net6.0\lecture 2.deps.json
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 2\lecture 2\bin\Debug\net6.0\lecture 2.runtimeconfig.json
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 2\lecture 2\bin\Debug\net6.0\lecture 2.dll
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 2\lecture 2\bin\Debug\net6.0\lecture 2.pdb
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 2\lecture 2\obj\Debug\net6.0\lecture 2.csproj.AssemblyReference.cache
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 2\lecture 2\obj\Debug\net6.0\lecture 2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 2\lecture 2\obj\Debug\net6.0\lecture 2.AssemblyInfoInputs.cache
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 2\lecture 2\obj\Debug\net6.0\lecture 2.AssemblyInfo.cs
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 2\lecture 2\obj\Debug\net6.0\lecture 2.csproj.CoreCompileInputs.cache
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 2\lecture 2\obj\Debug\net6.0\lecture 2.dll
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 2\lecture 2\obj\Debug\net6.0\refint\lecture 2.dll
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 2\lecture 2\obj\Debug\net6.0\lecture 2.pdb
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 2\lecture 2\obj\Debug\net6.0\lecture 2.genruntimeconfig.cache
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 2\lecture 2\obj\Debug\net6.0\ref\lecture 2.dll
