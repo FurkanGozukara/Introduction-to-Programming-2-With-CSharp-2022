@@ -22,12 +22,29 @@ namespace Lecture2 // Note: actual namespace depends on the project name.
             var vr2 = customSum(11, 0.22, 33);//double+double+int or int+double+int
             var vr4 = customSum(11d, 0.22, 33); // or var vr4 = customSum(11.0, 0.22, 33);
             var vr3 = customSum("11", 43, "35");
+
+            student myStudent = new student { irStudentID = 100, srStudentFirstName = "Furkan", srStudentLastName = "Gözükara"};
+
+            myStudent.srStudentCard = $"Student ID: {myStudent.irStudentID}, {myStudent.srStudentFirstName} {myStudent.srStudentLastName}";
+
+            Console.WriteLine(myStudent.srStudentCard);
+
+            Console.WriteLine();
+
+            Console.WriteLine(myStudent.srAutomaticStudentCard);
+
+            myStudent.irAge = 200;
+
+            Console.WriteLine("age : " + myStudent.irAge);//
+
+            myStudent.irAge = 1;
+            Console.WriteLine("age : " + myStudent.irAge);
         }
 
         //double + int + int
         public static double customSum(double dbl1, int ir1, int ir2)
         {
-            return dbl1 + ir1 + ir2;   
+            return dbl1 + ir1 + ir2;
         }
 
         //int + double + int
@@ -49,7 +66,7 @@ namespace Lecture2 // Note: actual namespace depends on the project name.
         }
 
         //string + string + double
-        public static string customSum(string str12, string str22 , double dbl22)
+        public static string customSum(string str12, string str22, double dbl22)
         {
             return str12 + dbl22 + str22;
         }
@@ -90,7 +107,7 @@ namespace Lecture2 // Note: actual namespace depends on the project name.
             srTitle = srTitle.Trim();
             srTitle = srTitle.TrimEnd();
 
-            double dblBase =-1;
+            double dblBase = -1;
             //try
             //{
             //    dblBase = double.Parse(vrSplit[1].Split('^').FirstOrDefault());
@@ -127,5 +144,35 @@ namespace Lecture2 // Note: actual namespace depends on the project name.
     //i can use a list that hold object type
     //i can use tuples
 
+    public class student
+    {
+        public int irStudentID;//field
+        public string srStudentFirstName { get; set; }//property
+
+        public string srStudentLastName;//field
+        public string srStudentCard { get; set; }//property
+
+        public string srAutomaticStudentCard // property and overloaded get
+        {
+            get//whenever you access srAutomaticStudentCard property for reading, this method will be always called
+            {
+                //this means that the instance of the parent class which is student
+                return $"Student ID: {this.irStudentID}, {this.srStudentFirstName} {this.srStudentLastName}";
+            }
+        }
+        private int _irAge = 50;
+        public int irAge 
+        {
+            get { return _irAge; }
+
+            set
+            {
+                if (value > 100)
+                    _irAge = 100;
+                if (value < 10)
+                    _irAge = 10;
+            }
+        }
+    }
 
 }
