@@ -6,7 +6,16 @@ namespace lecture_1503
     {
         static void Main(string[] args)
         {
- //i want you to use student class and set and read studentAge property and print to the console
+            //i want you to use student class and set and read studentAge property and print to the console
+
+            student csStudent = new student();
+            Console.WriteLine(csStudent.studentAge);
+            csStudent.studentAge = 110;
+            Console.WriteLine(csStudent.studentAge);
+            csStudent.studentAge = 5;
+            Console.WriteLine(csStudent.studentAge);
+            csStudent.studentAge = 55;
+            Console.WriteLine(csStudent.studentAge);
         }
 
 
@@ -14,6 +23,11 @@ namespace lecture_1503
     }
     public class student
     {
+        public student()//this is constructer class
+        {
+            _studentAge = -1;
+        }
+
         private int _studentAge;
 
         public int studentAge
