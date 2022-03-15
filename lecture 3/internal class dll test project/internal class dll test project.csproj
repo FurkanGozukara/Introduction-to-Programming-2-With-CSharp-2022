@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>internal_class_dll_test_project</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="lecture 3">
+      <HintPath>..\lecture 3\bin\Debug\net6.0\lecture 3.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

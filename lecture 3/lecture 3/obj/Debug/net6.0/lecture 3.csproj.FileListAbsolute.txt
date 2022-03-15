@@ -1,0 +1,15 @@
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 3\lecture 3\bin\Debug\net6.0\lecture 3.deps.json
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 3\lecture 3\bin\Debug\net6.0\lecture 3.dll
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 3\lecture 3\bin\Debug\net6.0\lecture 3.pdb
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 3\lecture 3\obj\Debug\net6.0\lecture 3.csproj.AssemblyReference.cache
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 3\lecture 3\obj\Debug\net6.0\lecture 3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 3\lecture 3\obj\Debug\net6.0\lecture 3.AssemblyInfoInputs.cache
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 3\lecture 3\obj\Debug\net6.0\lecture 3.AssemblyInfo.cs
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 3\lecture 3\obj\Debug\net6.0\lecture 3.csproj.CoreCompileInputs.cache
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 3\lecture 3\obj\Debug\net6.0\lecture 3.dll
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 3\lecture 3\obj\Debug\net6.0\refint\lecture 3.dll
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 3\lecture 3\obj\Debug\net6.0\lecture 3.pdb
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 3\lecture 3\obj\Debug\net6.0\ref\lecture 3.dll
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 3\lecture 3\bin\Debug\net6.0\lecture 3.exe
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 3\lecture 3\bin\Debug\net6.0\lecture 3.runtimeconfig.json
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 3\lecture 3\obj\Debug\net6.0\lecture 3.genruntimeconfig.cache
