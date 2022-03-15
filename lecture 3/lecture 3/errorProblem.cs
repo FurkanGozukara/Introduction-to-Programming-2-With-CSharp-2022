@@ -16,6 +16,53 @@ namespace lecture_1503
             Console.WriteLine(csStudent.studentAge);
             csStudent.studentAge = 55;
             Console.WriteLine(csStudent.studentAge);
+
+            string vrTest1 = null;
+
+            if (vrTest1?.Trim().ToLower() == "break")
+            {
+                Console.WriteLine("test 1 is not null");
+            }
+
+            if (vrTest1 != null)//this is equal to above
+            {
+                if (vrTest1.Trim().ToLower() == "break")
+                {
+                    Console.WriteLine("test 1 is not null");
+                }
+            }
+
+            //if (vrTest1.Trim().ToLower() == "break")
+            //{
+            //    Console.WriteLine("test 1 is not null");
+            //}
+
+            //keep all instances of student object and after user breaks the loop print all of them on the screen with a new static method
+
+            while (true)//this means it will loop forever until you break
+            {
+                //add a mechanism to break while loop from user input
+                Console.WriteLine("enter student age as numeric. to break enter break");
+                var vrUserInput = Console.ReadLine();
+
+                if (vrUserInput?.Trim().ToLower() == "break")//? means that if vrUserInput is null do not continue executing that code line
+                    break;
+
+                if (vrUserInput != null)//this is equal to above
+                {
+                    if (vrUserInput.Trim().ToLower() == "break")
+                        break;
+                }
+
+                student csUserStudent = new student();
+                int irTestAge = 0;
+                if (Int32.TryParse(vrUserInput, out irTestAge))
+                {
+                    csUserStudent.studentAge = irTestAge;
+                }
+                Console.WriteLine("user entered age = {csUserStudent.studentAge}");
+                Console.WriteLine($"user entered age = {csUserStudent.studentAge}");
+            }
         }
 
 
@@ -23,10 +70,7 @@ namespace lecture_1503
     }
     public class student
     {
-        public student()//this is constructer class
-        {
-            _studentAge = -1;
-        }
+
 
         private int _studentAge;
 
@@ -51,6 +95,9 @@ namespace lecture_1503
                     _studentAge = value;
             }
         }
-
+        public student()//this is constructer class
+        {
+            _studentAge = -1;
+        }
     }
 }
