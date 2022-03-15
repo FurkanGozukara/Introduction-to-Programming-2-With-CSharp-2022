@@ -19,6 +19,7 @@ namespace lecture_1503
             csStudent.studentAge = 55;
             Console.WriteLine(csStudent.studentAge);
 
+
             string vrTest1 = null;
 
             if (vrTest1?.Trim().ToLower() == "break")
@@ -75,6 +76,10 @@ namespace lecture_1503
 
             //with adding using lecture_3; now we have all classes and methods of that name space
             //staticMethods.printStudentsWithFor(lstStudents);
+
+            staticMethods.printStudentsWithForEach(lstStudents);
+
+            student parameterStudent = new student(500);//we are giving a parameter to the class constructor
         }
     }
     public class student
@@ -104,9 +109,14 @@ namespace lecture_1503
                     _studentAge = value;
             }
         }
-        public student()//this is constructer class
+        public student()//this is constructer class // signature is empty
         {
-            _studentAge = -1;
+            studentAge = -1;
+        }
+
+        public student(int initValue)//this is constructer class //signature is int
+        {
+            studentAge = initValue;
         }
     }
 }
