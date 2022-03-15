@@ -39,6 +39,8 @@ namespace lecture_1503
 
             //keep all instances of student object and after user breaks the loop print all of them on the screen with a new static method
 
+            List<student> lstStudents = new List<student>();
+
             while (true)//this means it will loop forever until you break
             {
                 //add a mechanism to break while loop from user input
@@ -62,11 +64,10 @@ namespace lecture_1503
                 }
                 Console.WriteLine("user entered age = {csUserStudent.studentAge}");
                 Console.WriteLine($"user entered age = {csUserStudent.studentAge}");
+
+                lstStudents.Add(csUserStudent);
             }
         }
-
-
-
     }
     public class student
     {
