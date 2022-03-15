@@ -1,4 +1,6 @@
 ﻿using System;
+using lecture_3;
+
 
 namespace lecture_1503
 {
@@ -47,7 +49,7 @@ namespace lecture_1503
                 Console.WriteLine("enter student age as numeric. to break enter break");
                 var vrUserInput = Console.ReadLine();
 
-                if (vrUserInput?.Trim().ToLower() == "break")//? means that if vrUserInput is null do not continue executing that code line
+                if (vrUserInput?.Trim().ToLower() == "break")//? means that if {vrUserInput is null do not continue executing that code line
                     break;
 
                 if (vrUserInput != null)//this is equal to above
@@ -67,6 +69,12 @@ namespace lecture_1503
 
                 lstStudents.Add(csUserStudent);
             }
+
+            
+            lecture_3.staticMethods.printStudentsWithFor(lstStudents);
+
+            //with adding using lecture_3; now we have all classes and methods of that name space
+            //staticMethods.printStudentsWithFor(lstStudents);
         }
     }
     public class student
