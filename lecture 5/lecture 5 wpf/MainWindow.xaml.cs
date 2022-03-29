@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace lecture_5_wpf
 {
@@ -24,7 +25,7 @@ namespace lecture_5_wpf
         {
             InitializeComponent();
             populateComboBox();
-            
+
         }
 
         private void populateComboBox()
@@ -81,7 +82,7 @@ namespace lecture_5_wpf
 
                 case 1:
                     lstNames.Items.SortDescriptions.Clear();
-                    lstNames.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("",System.ComponentModel.ListSortDirection.Ascending));
+                    lstNames.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("", System.ComponentModel.ListSortDirection.Ascending));
                     break;
                 case 2:
                     lstNames.Items.SortDescriptions.Clear();
@@ -97,7 +98,7 @@ namespace lecture_5_wpf
                         lstItems.Add(vrItem.ToString());
                     }
                     lstItems = shuffleList(lstItems);
-                    
+
                     lstNames.Items.Clear();
                     foreach (string item in lstItems)
                     {
@@ -114,16 +115,69 @@ namespace lecture_5_wpf
 
         private static List<string> shuffleList(List<string> lstMyList)
         {
-            Random rng=new Random();
+            Random rng = new Random();
             List<string> lstNewList = new List<string>();
-            while(lstMyList.Count > 0)
+            while (lstMyList.Count > 0)
             {
-                int irNewIndex=rng.Next(0,lstMyList.Count);
+                int irNewIndex = rng.Next(0, lstMyList.Count);
                 lstNewList.Add(lstMyList[irNewIndex]);
                 lstMyList.RemoveAt(irNewIndex);
             }
             return lstNewList;
         }
-    
+
+        private void btnSaveListBoxContent_Click(object sender, RoutedEventArgs e)
+        {
+            //if you dont provide a full path it will compose file inside the debug folder where the exe is running
+            writeToFile_v5("test.txt", lstNames.Items.Cast<string>().ToList());
+            Directory.CreateDirectory(@"C:\a\");
+            writeToFile_v1(@"C:\a\test.txt", lstNames.Items.Cast<string>().ToList());
+        }
+
+        private static void writeToFile_v1(string srFileName, List<string> lstContent)
+        {
+            File.WriteAllLines(srFileName, lstContent);
+        }
+
+        private static void writeToFile_v2(string srFileName, List<string> lstContent)
+        {
+            using (StreamWriter swWrite = new StreamWriter(srFileName))
+            {
+                swWrite.AutoFlush = true;
+                foreach (var vrPerLine in lstContent)
+                {
+                    swWrite.WriteLine(vrPerLine);
+                }
+            }
+        }
+
+        private static void writeToFile_v3(string srFileName, List<string> lstContent)
+        {
+            StreamWriter swWrite = new StreamWriter(srFileName);
+            swWrite.AutoFlush = true;
+            foreach (var vrPerLine in lstContent)
+            {
+                swWrite.WriteLine(vrPerLine);
+            }
+            swWrite.Flush();
+            swWrite.Close();
+        }
+
+        private static void writeToFile_v4(string srFileName, List<string> lstContent)
+        {
+            File.Delete(srFileName);
+            foreach (var vrLine in lstContent)
+            {
+                File.AppendAllText(srFileName, vrLine);
+            }
+        }
+
+        private static void writeToFile_v5(string srFileName, List<string> lstContent)
+        {
+            var vrFile = String.Join("\r\n", lstContent);
+            File.WriteAllText(srFileName, vrFile);
+        }
     }
+
 }
+
