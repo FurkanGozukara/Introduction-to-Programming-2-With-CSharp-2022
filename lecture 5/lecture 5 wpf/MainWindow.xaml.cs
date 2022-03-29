@@ -21,6 +21,12 @@ namespace lecture_5_wpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        enum enListBoxNames
+        {
+            lstBoxNames,
+            lstBoxGrades
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -45,7 +51,7 @@ namespace lecture_5_wpf
             //   MessageBox.Show(srFullname, "Your Name");
             //  MessageBox.Show(srFullname + "\n" + "second line");
 
-            lstNames.Items.Add(srFullname);
+            lstBoxNames.Items.Add(srFullname);
 
         }
 
@@ -55,8 +61,8 @@ namespace lecture_5_wpf
             int irInsertIndex = 0;
             Int32.TryParse(txtinserindex.Text, out irInsertIndex);
 
-            if (irInsertIndex > lstNames.Items.Count)
-                irInsertIndex = lstNames.Items.Count;
+            if (irInsertIndex > lstBoxNames.Items.Count)
+                irInsertIndex = lstBoxNames.Items.Count;
 
             irInsertIndex = (irInsertIndex < 0) ? 0 : irInsertIndex;//this is if and else in a single line and it is equal to below
 
@@ -69,7 +75,7 @@ namespace lecture_5_wpf
                 irInsertIndex = irInsertIndex;
             }
 
-            lstNames.Items.Insert(irInsertIndex, srFullname);
+            lstBoxNames.Items.Insert(irInsertIndex, srFullname);
         }
 
         private void btnSort_Click(object sender, RoutedEventArgs e)
@@ -81,34 +87,59 @@ namespace lecture_5_wpf
                     break;
 
                 case 1:
-                    lstNames.Items.SortDescriptions.Clear();
-                    lstNames.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("", System.ComponentModel.ListSortDirection.Ascending));
+                    lstBoxNames.Items.SortDescriptions.Clear();
+                    lstBoxNames.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("", System.ComponentModel.ListSortDirection.Ascending));
                     break;
                 case 2:
-                    lstNames.Items.SortDescriptions.Clear();
-                    lstNames.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("", System.ComponentModel.ListSortDirection.Descending));
+                    lstBoxNames.Items.SortDescriptions.Clear();
+                    lstBoxNames.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("", System.ComponentModel.ListSortDirection.Descending));
                     break;
                 case 3:
-                    string[] myItems = new string[lstNames.Items.Count];
-                    lstNames.Items.CopyTo(myItems, 0);
+                    string[] myItems = new string[lstBoxNames.Items.Count];
+                    lstBoxNames.Items.CopyTo(myItems, 0);
 
                     List<string> lstItems = new List<string>();
-                    foreach (var vrItem in lstNames.Items)
+                    foreach (var vrItem in lstBoxNames.Items)
                     {
                         lstItems.Add(vrItem.ToString());
                     }
                     lstItems = shuffleList(lstItems);
 
-                    lstNames.Items.Clear();
-                    foreach (string item in lstItems)
-                    {
-                        lstNames.Items.Add(item);
-                    }
+                    //lstBoxNames.Items.Clear();
+                    //foreach (string item in lstItems)
+                    //{
+                    //    lstBoxNames.Items.Add(item);
+                    //}
 
-                    for (int i = 0; i < lstNames.Items.Count; i++)
+                    //for (int i = 0; i < lstBoxNames.Items.Count; i++)
+                    //{
+                    //    lstBoxNames.Items[i] = lstItems[i];
+                    //}
+
+                    loadIntoListBox(enListBoxNames.lstBoxNames, lstItems, this);
+                    break;
+            }
+        }
+
+        private static void loadIntoListBox(enListBoxNames whichBox, List<string> lstValues, MainWindow myMain)
+        {
+            switch (whichBox)
+            {
+                case enListBoxNames.lstBoxNames:
+                    myMain.lstBoxNames.Items.Clear();
+                    foreach (var vrVal in lstValues)
                     {
-                        lstNames.Items[i] = lstItems[i];
+                        myMain.lstBoxNames.Items.Add(vrVal);
                     }
+                    break;
+                case enListBoxNames.lstBoxGrades:
+                    myMain.lstBoxGrades.Items.Clear();
+                    foreach (var vrVal in lstValues)
+                    {
+                        myMain.lstBoxGrades.Items.Add(vrVal);
+                    }
+                    break;
+                default:
                     break;
             }
         }
@@ -129,9 +160,9 @@ namespace lecture_5_wpf
         private void btnSaveListBoxContent_Click(object sender, RoutedEventArgs e)
         {
             //if you dont provide a full path it will compose file inside the debug folder where the exe is running
-            writeToFile_v5("test.txt", lstNames.Items.Cast<string>().ToList());
+            writeToFile_v5("test.txt", lstBoxNames.Items.Cast<string>().ToList());
             Directory.CreateDirectory(@"C:\a\");
-            writeToFile_v1(@"C:\a\test.txt", lstNames.Items.Cast<string>().ToList());
+            writeToFile_v1(@"C:\a\test.txt", lstBoxNames.Items.Cast<string>().ToList());
 
             //use all 5 different methods to write different files into different folders
         }
@@ -182,12 +213,12 @@ namespace lecture_5_wpf
 
         private void btnLoadFromFile_Click(object sender, RoutedEventArgs e)
         {
-
+            loadIntoListBox(enListBoxNames.lstBoxNames, readFromFile_v2("test.txt"), this);
         }
 
         private static List<string> readFromFile_v1(string srPath)
         {
-           return File.ReadAllText(srPath).Split(Environment.NewLine).ToList();
+            return File.ReadAllText(srPath).Split(Environment.NewLine).ToList();
         }
 
         private static List<string> readFromFile_v2(string srPath)
@@ -208,9 +239,9 @@ namespace lecture_5_wpf
         private static List<string> readFromFile_v4(string srPath)
         {
             List<string> lstValues = new List<string>();
-            using (StreamReader swRead=new StreamReader(srPath))
+            using (StreamReader swRead = new StreamReader(srPath))
             {
-               while(true)
+                while (true)
                 {
                     var vrLine = swRead.ReadLine();
                     if (vrLine == null)
@@ -222,7 +253,14 @@ namespace lecture_5_wpf
             return lstValues;
         }
 
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            lstBoxNames.Items.Clear();
+        }
+
         //write a method to load into listbox from file using above methods
+
+
     }
 
 }
