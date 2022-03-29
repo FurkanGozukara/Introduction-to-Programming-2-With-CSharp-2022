@@ -1,0 +1,21 @@
+
+Random sorting / shuffling lists
+What are enum
+how to use main window elements inside a static method with giving this as a parameter
+how to use enum inside switch case
+how to write something to a text file with system io file operations and system io streamwriter operations
+how to read text file with system io file read operations and system io streamreader operations
+how to update listbox values
+how to assign an event to listbox such as double click
+  File.Delete ,   File.AppendAllText ,  File.WriteAllLines , StreamWriter swWrite ,   swWrite.AutoFlush ,  swWrite.WriteLine ,      swWrite.Flush ,        swWrite.Close
+ MessageBox.Show
+ WPF dialog box with Ookii.Dialogs library
+ Listbox selected index update values
+ StreamReader swRead , swRead.ReadLine() , foreach File.ReadLines,  File.ReadAllLines,  File.ReadAllText
+string split 
+string join
+file read relative path
+file read absolute path
+file read dynamic path
+
+  
