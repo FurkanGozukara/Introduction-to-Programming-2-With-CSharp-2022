@@ -24,6 +24,7 @@ namespace lecture_4_wpf
         {
             InitializeComponent();
             populateComboBox();
+            
         }
 
         private void populateComboBox()
