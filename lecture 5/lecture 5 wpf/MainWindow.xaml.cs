@@ -132,6 +132,8 @@ namespace lecture_5_wpf
             writeToFile_v5("test.txt", lstNames.Items.Cast<string>().ToList());
             Directory.CreateDirectory(@"C:\a\");
             writeToFile_v1(@"C:\a\test.txt", lstNames.Items.Cast<string>().ToList());
+
+            //use all 5 different methods to write different files into different folders
         }
 
         private static void writeToFile_v1(string srFileName, List<string> lstContent)
@@ -177,6 +179,50 @@ namespace lecture_5_wpf
             var vrFile = String.Join("\r\n", lstContent);
             File.WriteAllText(srFileName, vrFile);
         }
+
+        private void btnLoadFromFile_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private static List<string> readFromFile_v1(string srPath)
+        {
+           return File.ReadAllText(srPath).Split(Environment.NewLine).ToList();
+        }
+
+        private static List<string> readFromFile_v2(string srPath)
+        {
+            return File.ReadAllLines(srPath).ToList();
+        }
+
+        private static List<string> readFromFile_v3(string srPath)
+        {
+            List<string> lstValues = new List<string>();
+            foreach (var vrPerLine in File.ReadLines(srPath))
+            {
+                lstValues.Add(vrPerLine);
+            }
+            return lstValues;
+        }
+
+        private static List<string> readFromFile_v4(string srPath)
+        {
+            List<string> lstValues = new List<string>();
+            using (StreamReader swRead=new StreamReader(srPath))
+            {
+               while(true)
+                {
+                    var vrLine = swRead.ReadLine();
+                    if (vrLine == null)
+                        break;
+                    lstValues.Add(vrLine);
+                }
+            }
+
+            return lstValues;
+        }
+
+        //write a method to load into listbox from file using above methods
     }
 
 }
