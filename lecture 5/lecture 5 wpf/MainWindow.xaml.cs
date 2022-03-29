@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using System.Reflection;
 
 namespace lecture_5_wpf
 {
@@ -213,7 +214,19 @@ namespace lecture_5_wpf
 
         private void btnLoadFromFile_Click(object sender, RoutedEventArgs e)
         {
-            loadIntoListBox(enListBoxNames.lstBoxNames, readFromFile_v2("test.txt"), this);
+            var vrPath = Assembly.GetEntryAssembly().Location;
+            string execPath = AppDomain.CurrentDomain.BaseDirectory;
+            var vrPath3 = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
+
+            var vrDefaultPath = "test.txt";
+            if(txtReadFilePath.Text !="null")
+            {
+                vrDefaultPath = txtReadFilePath.Text;
+            }
+
+            loadIntoListBox(enListBoxNames.lstBoxNames, readFromFile_v4(vrDefaultPath), this);
+
+            //loadIntoListBox(enListBoxNames.lstBoxGrades, readFromFile_v4(@"C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 5\lecture 5 wpf\bin\Debug\net6.0-windows\test.txt"), this);
         }
 
         private static List<string> readFromFile_v1(string srPath)
@@ -256,6 +269,25 @@ namespace lecture_5_wpf
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             lstBoxNames.Items.Clear();
+        }
+
+        private void btnSelectFile_Click(object sender, RoutedEventArgs e)
+        {
+            string srPath = "null";
+            var dialog = new Ookii.Dialogs.Wpf.VistaOpenFileDialog();
+            if (dialog.ShowDialog(this).GetValueOrDefault())
+            {
+                srPath = dialog.FileName;
+            }
+            txtReadFilePath.Text = srPath;
+        }
+
+        private void lstBoxNames_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var vrSelectedIndex = lstBoxNames.SelectedIndex;
+            lstBoxNames.Items[vrSelectedIndex] = DateTime.Now.ToString();
+            lstBoxNames.SelectedIndex = vrSelectedIndex;
+            MessageBox.Show(lstBoxNames.SelectedItem?.ToString());
         }
 
         //write a method to load into listbox from file using above methods

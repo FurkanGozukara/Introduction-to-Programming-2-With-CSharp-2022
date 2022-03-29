@@ -24,3 +24,5 @@ C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 5\lecture 5
 C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 5\lecture 5 wpf\obj\Debug\net6.0-windows\lecture 5 wpf.pdb
 C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 5\lecture 5 wpf\obj\Debug\net6.0-windows\lecture 5 wpf.genruntimeconfig.cache
 C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 5\lecture 5 wpf\obj\Debug\net6.0-windows\ref\lecture 5 wpf.dll
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 5\lecture 5 wpf\bin\Debug\net6.0-windows\Ookii.Dialogs.Wpf.dll
+C:\Users\Furkan Gözükara\Desktop\2022 advanced programming\lecture 5\lecture 5 wpf\obj\Debug\net6.0-windows\lecture 5 wpf.csproj.CopyComplete

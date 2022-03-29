@@ -5,23 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lecture_5_wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Lecture 5" Height="592" Width="800" ResizeMode="NoResize" Icon="/bird.png" WindowStartupLocation="CenterScreen" Cursor="Wait" WindowStyle="ThreeDBorderWindow" Background="#FBFF7A7A" HorizontalAlignment="Center">
     <Grid>
-        <TextBox Name="txtFirstName" HorizontalAlignment="Left" Margin="30,28,0,0" TextWrapping="Wrap" Text="first name" VerticalAlignment="Top" Width="231" Height="36" FontFamily="Bahnschrift SemiBold" FontSize="15" TextAlignment="Center"/>
-        <TextBox x:Name="txtLastName" HorizontalAlignment="Left" Margin="300,28,0,0" TextWrapping="Wrap" Text="last name" VerticalAlignment="Top" Width="231" Height="36" FontFamily="Bahnschrift SemiBold" FontSize="15" TextAlignment="Center"/>
-        <Button x:Name="btnAddNames" Content="Add Name" HorizontalAlignment="Left" Margin="572,26,0,0" VerticalAlignment="Top" Height="38" Width="84" Click="btnAddNames_Click"   />
-        <ListBox x:Name="lstBoxNames"  Margin="30,83,87,232">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="14*"/>
+            <ColumnDefinition Width="429*"/>
+            <ColumnDefinition Width="187*"/>
+            <ColumnDefinition Width="92*"/>
+            <ColumnDefinition Width="70*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Name="txtFirstName" HorizontalAlignment="Left" Margin="8,28,0,0" TextWrapping="Wrap" Text="first name" VerticalAlignment="Top" Width="231" Height="36" FontFamily="Bahnschrift SemiBold" FontSize="15" TextAlignment="Center" Grid.Column="2"/>
+        <TextBox x:Name="txtLastName" HorizontalAlignment="Left" Margin="278,28,0,0" TextWrapping="Wrap" Text="last name" VerticalAlignment="Top" Width="231" Height="36" FontFamily="Bahnschrift SemiBold" FontSize="15" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Column="2"/>
+        <Button x:Name="btnAddNames" Content="Add Name" HorizontalAlignment="Left" Margin="121,26,0,0" VerticalAlignment="Top" Height="38" Width="84" Click="btnAddNames_Click" Grid.Column="3" Grid.ColumnSpan="2"   />
+        <ListBox x:Name="lstBoxNames"  Margin="8,83,18,379" Grid.ColumnSpan="4" Grid.Column="2" MouseDoubleClick="lstBoxNames_MouseDoubleClick">
 
         </ListBox>
-        <Button x:Name="btnInsertName" Content="insert name" HorizontalAlignment="Left" Margin="629,217,0,0" VerticalAlignment="Top" Height="38" Width="84" Click="btnInsertName_Click"  />
-        <TextBox x:Name="txtinserindex" HorizontalAlignment="Left" Margin="465,218,0,0" TextWrapping="Wrap" Text="insert index" VerticalAlignment="Top" Width="130" Height="37"/>
-        <ComboBox x:Name="cmbSortOptions" HorizontalAlignment="Left" Margin="30,257,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnSort" Content="sort listbox" HorizontalAlignment="Left" Margin="181,248,0,0" VerticalAlignment="Top" Height="55" Width="80" Click="btnSort_Click"/>
-        <Button Name="btnSaveListBoxContent" Content="save listbox to a file" HorizontalAlignment="Left" Margin="465,288,0,0" VerticalAlignment="Top" Height="32" Width="164" Click="btnSaveListBoxContent_Click"/>
-        <Button Content="load from file" Name="btnLoadFromFile" HorizontalAlignment="Left" Margin="465,338,0,0" VerticalAlignment="Top" Height="47" Width="164" Click="btnLoadFromFile_Click"/>
-        <ListBox  Name="lstBoxGrades" Margin="30,310,474,10">
-        </ListBox>
-        <Button Name="btnClear" Content="clear listbox" HorizontalAlignment="Left" Margin="465,404,0,0" VerticalAlignment="Top" Width="130" Click="btnClear_Click"/>
+        <Button x:Name="btnInsertName" Content="insert name" HorizontalAlignment="Left" Margin="178,217,0,0" VerticalAlignment="Top" Height="38" Width="84" Click="btnInsertName_Click" Grid.Column="3" Grid.ColumnSpan="2"  />
+        <TextBox x:Name="txtinserindex" HorizontalAlignment="Left" Margin="14,218,0,0" TextWrapping="Wrap" Text="insert index" VerticalAlignment="Top" Width="130" Height="37" Grid.Column="3"/>
+        <ComboBox x:Name="cmbSortOptions" HorizontalAlignment="Left" Margin="8,257,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+        <Button x:Name="btnSort" Content="sort listbox" HorizontalAlignment="Left" Margin="159,248,0,0" VerticalAlignment="Top" Height="55" Width="80" Click="btnSort_Click" Grid.Column="2"/>
+        <Button Name="btnSaveListBoxContent" Content="save listbox to a file" HorizontalAlignment="Left" Margin="14,288,0,0" VerticalAlignment="Top" Height="32" Width="164" Click="btnSaveListBoxContent_Click" Grid.Column="3"/>
+        <Button Content="load from file" Name="btnLoadFromFile" HorizontalAlignment="Left" Margin="14,338,0,0" VerticalAlignment="Top" Height="47" Width="164" Click="btnLoadFromFile_Click" Grid.Column="3"/>
+        <ListBox  Name="lstBoxGrades" Width="300" Margin="8,362,121,126" Grid.Column="2" />
+        <Button Name="btnClear" Content="clear listbox" HorizontalAlignment="Left" Margin="14,404,0,0" VerticalAlignment="Top" Width="130" Click="btnClear_Click" Grid.Column="3"/>
+        <Button Content="select file for loading" Name="btnSelectFile" HorizontalAlignment="Left" Margin="14,481,0,0" VerticalAlignment="Top" Height="38" Width="164" Click="btnSelectFile_Click" Grid.Column="3"/>
+        <TextBox Name="txtReadFilePath" HorizontalAlignment="Left" Margin="2,463,0,0" TextWrapping="Wrap" Text="null" VerticalAlignment="Top" Width="429" Height="68" Grid.ColumnSpan="2" Grid.Column="1"/>
 
     </Grid>
 </Window>
