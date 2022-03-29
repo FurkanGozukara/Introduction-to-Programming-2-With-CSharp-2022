@@ -87,7 +87,43 @@ namespace lecture_5_wpf
                     lstNames.Items.SortDescriptions.Clear();
                     lstNames.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("", System.ComponentModel.ListSortDirection.Descending));
                     break;
+                case 3:
+                    string[] myItems = new string[lstNames.Items.Count];
+                    lstNames.Items.CopyTo(myItems, 0);
+
+                    List<string> lstItems = new List<string>();
+                    foreach (var vrItem in lstNames.Items)
+                    {
+                        lstItems.Add(vrItem.ToString());
+                    }
+                    lstItems = shuffleList(lstItems);
+                    
+                    lstNames.Items.Clear();
+                    foreach (string item in lstItems)
+                    {
+                        lstNames.Items.Add(item);
+                    }
+
+                    for (int i = 0; i < lstNames.Items.Count; i++)
+                    {
+                        lstNames.Items[i] = lstItems[i];
+                    }
+                    break;
             }
         }
+
+        private static List<string> shuffleList(List<string> lstMyList)
+        {
+            Random rng=new Random();
+            List<string> lstNewList = new List<string>();
+            while(lstMyList.Count > 0)
+            {
+                int irNewIndex=rng.Next(0,lstMyList.Count);
+                lstNewList.Add(lstMyList[irNewIndex]);
+                lstMyList.RemoveAt(irNewIndex);
+            }
+            return lstNewList;
+        }
+    
     }
 }
