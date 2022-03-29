@@ -1,0 +1,20 @@
+public 
+private 
+class
+static
+static olmayan
+nesne nedir
+initialize new ile 
+method yazma
+method dönüş tipi
+method overloading
+listeler
+liste içinde custom sınıf tip
+sınıf nesnesinden metot çağırma
+field property farkı nedir
+property leri overload etme get set ile
+CultureInfo  ile . , ayrımı double parse ederken
+try catch
+tryparse
+tuple
+convert to

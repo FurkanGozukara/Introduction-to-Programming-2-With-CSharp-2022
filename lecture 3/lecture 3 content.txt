@@ -1,0 +1,16 @@
+what is namespace and why do we use
+what is internal accessor and how it works on different projects
+how to add a new project to the same solution
+how to change startup program of a console application
+static and non static difference
+when do we use static
+how to output program as a dll
+null check importance and null check with ?
+while for foreach
+take input from user
+Int32.TryParse
+how to use list to hold instances of objects
+how to pass parameter to another method inside another class
+get set
+class constructors
+initilization of classes with passing parameters to their constructors
