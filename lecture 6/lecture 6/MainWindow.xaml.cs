@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Diagnostics;
+using System.Data;
 
 namespace lecture_6
 {
@@ -125,6 +126,16 @@ namespace lecture_6
 
             File.AppendAllText("format_test.txt", DateTime.Now.ToString("yyyyy:MMMM:dddd" + Environment.NewLine));
             File.AppendAllText("format_test.txt", DateTime.Now.ToString("yyyy | MM | dd  | mm || ss | fffff" + "\r\n"));
+        }
+
+        private void btnReturnStudents_Click(object sender, RoutedEventArgs e)
+        {
+            DataTable dtStudents = DbOperations.selectTable("select * from tblStudents");
+
+            foreach (DataRow drw in dtStudents.Rows)
+            {
+                MessageBox.Show($"student id: {drw["StudentId"].ToString()} \t student name: {drw["StudentName"].ToString()}");
+            }
         }
     }
 }

@@ -8,6 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Name="btnPerformance" Content="performance test" HorizontalAlignment="Left" Margin="45,47,0,0" VerticalAlignment="Top" Height="71" Width="126" Click="btnPerformance_Click"/>
+        <Button Content="return students" Name="btnReturnStudents" HorizontalAlignment="Left" Margin="214,55,0,0" VerticalAlignment="Top" Height="52" Width="92" Click="btnReturnStudents_Click"/>
 
     </Grid>
 </Window>
