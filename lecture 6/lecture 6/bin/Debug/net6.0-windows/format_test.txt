@@ -1,0 +1,144 @@
+N0 format:	 324,121
+N1 format:	 324,121.4
+N2 format:	 324,121.41
+N3 format:	 324,121.412
+##### format:	 324121
+##,# format:	 324,121
+%#0.00 format:	 %32412141.23
+#0.00‰ format:	 324121412.31‰
+N0 format:	 324,121
+N1 format:	 324,121.4
+N2 format:	 324,121.41
+N3 format:	 324,121.412
+##### format:	 324121
+##,# format:	 324,121
+%#0.00 format:	 %32412141.23
+#0.00‰ format:	 324121412.31‰
+02022:April:TuesdayN0 format:	 324,121
+N1 format:	 324,121.4
+N2 format:	 324,121.41
+N3 format:	 324,121.412
+##### format:	 324121
+##,# format:	 324,121
+%#0.00 format:	 %32412141.23
+#0.00‰ format:	 324121412.31‰
+02022:April:Tuesday2022 | 04 | 05  | 54 || 07 | 74467N0 format:	 324,121
+N1 format:	 324,121.4
+N2 format:	 324,121.41
+N3 format:	 324,121.412
+##### format:	 324121
+##,# format:	 324,121
+%#0.00 format:	 %32412141.23
+#0.00‰ format:	 324121412.31‰
+02022:April:Tuesday
+2022 | 04 | 05  | 57 || 02 | 19627
+N0 format:	 324,121
+N1 format:	 324,121.4
+N2 format:	 324,121.41
+N3 format:	 324,121.412
+##### format:	 324121
+##,# format:	 324,121
+%#0.00 format:	 %32412141.23
+#0.00‰ format:	 324121412.31‰
+02022:April:Tuesday
+2022 | 04 | 05  | 58 || 05 | 29326
+N0 format:	 324,121
+N1 format:	 324,121.4
+N2 format:	 324,121.41
+N3 format:	 324,121.412
+##### format:	 324121
+##,# format:	 324,121
+%#0.00 format:	 %32412141.23
+#0.00‰ format:	 324121412.31‰
+02022:April:Tuesday
+2022 | 04 | 05  | 59 || 14 | 94323
+N0 format:	 324,121
+N1 format:	 324,121.4
+N2 format:	 324,121.41
+N3 format:	 324,121.412
+##### format:	 324121
+##,# format:	 324,121
+%#0.00 format:	 %32412141.23
+#0.00‰ format:	 324121412.31‰
+02022:April:Tuesday
+2022 | 04 | 05  | 00 || 07 | 22244
+N0 format:	 324,121
+N1 format:	 324,121.4
+N2 format:	 324,121.41
+N3 format:	 324,121.412
+##### format:	 324121
+##,# format:	 324,121
+%#0.00 format:	 %32412141.23
+#0.00‰ format:	 324121412.31‰
+02022:April:Tuesday
+2022 | 04 | 05  | 00 || 47 | 07748
+N0 format:	 324,121
+N1 format:	 324,121.4
+N2 format:	 324,121.41
+N3 format:	 324,121.412
+##### format:	 324121
+##,# format:	 324,121
+%#0.00 format:	 %32412141.23
+#0.00‰ format:	 324121412.31‰
+02022:April:Tuesday
+2022 | 04 | 05  | 03 || 03 | 63030
+N0 format:	 324,121
+N1 format:	 324,121.4
+N2 format:	 324,121.41
+N3 format:	 324,121.412
+##### format:	 324121
+##,# format:	 324,121
+%#0.00 format:	 %32412141.23
+#0.00‰ format:	 324121412.31‰
+02022:April:Tuesday
+2022 | 04 | 05  | 04 || 43 | 88628
+N0 format:	 324,121
+N1 format:	 324,121.4
+N2 format:	 324,121.41
+N3 format:	 324,121.412
+##### format:	 324121
+##,# format:	 324,121
+%#0.00 format:	 %32412141.23
+#0.00‰ format:	 324121412.31‰
+02022:April:Tuesday
+2022 | 04 | 05  | 08 || 44 | 16982
+N0 format:	 324,121
+N1 format:	 324,121.4
+N2 format:	 324,121.41
+N3 format:	 324,121.412
+##### format:	 324121
+##,# format:	 324,121
+%#0.00 format:	 %32412141.23
+#0.00‰ format:	 324121412.31‰
+02022:April:Tuesday
+2022 | 04 | 05  | 11 || 30 | 39193
+N0 format:	 324,121
+N1 format:	 324,121.4
+N2 format:	 324,121.41
+N3 format:	 324,121.412
+##### format:	 324121
+##,# format:	 324,121
+%#0.00 format:	 %32412141.23
+#0.00‰ format:	 324121412.31‰
+02022:April:Tuesday
+2022 | 04 | 05  | 11 || 38 | 05604
+N0 format:	 324,121
+N1 format:	 324,121.4
+N2 format:	 324,121.41
+N3 format:	 324,121.412
+##### format:	 324121
+##,# format:	 324,121
+%#0.00 format:	 %32412141.23
+#0.00‰ format:	 324121412.31‰
+02022:April:Tuesday
+2022 | 04 | 05  | 15 || 07 | 90523
+N0 format:	 324,121
+N1 format:	 324,121.4
+N2 format:	 324,121.41
+N3 format:	 324,121.412
+##### format:	 324121
+##,# format:	 324,121
+%#0.00 format:	 %32412141.23
+#0.00‰ format:	 324121412.31‰
+02022:April:Tuesday
+2022 | 04 | 05  | 16 || 00 | 56358

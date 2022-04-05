@@ -1,0 +1,13 @@
+﻿<Window x:Class="lecture_6.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:lecture_6"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button Name="btnPerformance" Content="performance test" HorizontalAlignment="Left" Margin="45,47,0,0" VerticalAlignment="Top" Height="71" Width="126" Click="btnPerformance_Click"/>
+
+    </Grid>
+</Window>
