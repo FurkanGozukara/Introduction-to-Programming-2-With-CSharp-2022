@@ -1,0 +1,3 @@
+SQL error: Query= select * from tblStudentsa Error: Invalid object name 'tblStudentsa'.
+
+
