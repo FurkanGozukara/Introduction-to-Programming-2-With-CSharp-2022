@@ -1,3 +1,11 @@
 SQL error: Query= select * from tblStudentsa Error: Invalid object name 'tblStudentsa'.
 
 
+SQL error: Query=   update tblStudents set StudentName=N'Deneme update',PhoneNumber=N'asd',Email=N'asdas',BirthDate=N'29.03.2022 00:00:00',LastLoginDate=N'4.04.2022 00:00:00' 
+                    where StudentId = 123 Error: Conversion failed when converting date and/or time from character string.
+
+
+SQL error: Query=   update tblStudents set StudentName=N'asd',PhoneNumber=N'asd',Email=N'dsfds',BirthDate=N'2022-00-29',LastLoginDate=N'2022-00-04 12:00:00' 
+                    where StudentId = 123 Error: Conversion failed when converting date and/or time from character string.
+
+

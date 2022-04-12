@@ -57,7 +57,7 @@ namespace lecture_7
 
             dtStudents.ItemsSource = dvData;
 
-           
+
 
         }
 
@@ -75,16 +75,60 @@ namespace lecture_7
                 dateLogin.SelectedDate.Value.ToString());
 
             int irResult = DbOperations.updateDeleteInsert(srAddNewStudent);
+            displayResult(irResult);
+        }
 
+        private void displayResult(int irResult)
+        {
             if (irResult == -1)
             {
-                MessageBox.Show("an  SQL error occured. Please check the logs");
+                MessageBox.Show("an SQL error occured. Please check the logs");
                 return;
             }
 
             MessageBox.Show("success query. number of rows affected : " + irResult);
 
             refreshDataGrid();
+        }
+
+        private void btnDeleteSelected_Click(object sender, RoutedEventArgs e)
+        {
+            if (dtStudents.SelectedItem == null)
+                return;
+
+            DataRowView vrItem = (DataRowView)dtStudents.SelectedItem;
+
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show($"Are you sure to delete Student Id {vrItem.Row["StudentId"]} - {vrItem.Row["StudentName"]}?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+            if (messageBoxResult != MessageBoxResult.Yes)
+            {
+                return;
+            }
+
+            int irResult = DbOperations.updateDeleteInsert($"delete from tblStudents where StudentId={vrItem.Row["StudentId"]}");
+
+            displayResult(irResult);
+        }
+
+        private void btnUpdateRecord_Click(object sender, RoutedEventArgs e)
+        {
+            if (dtStudents.SelectedItem == null)
+                return;
+
+            DataRowView vrItem = (DataRowView)dtStudents.SelectedItem;
+
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show($"Are you sure to update Student Id {vrItem.Row["StudentId"]} - {vrItem.Row["StudentName"]}?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+            if (messageBoxResult != MessageBoxResult.Yes)
+            {
+                return;
+            }
+
+            DateTime dtBirth = Convert.ToDateTime(vrItem["BirthDate"]);
+            DateTime dtLastLogin = Convert.ToDateTime(vrItem["LastLoginDate"]);
+
+            int irResult = DbOperations.updateDeleteInsert(@$"  update tblStudents set StudentName=N'{vrItem["StudentName"]}',PhoneNumber=N'{vrItem["PhoneNumber"]}',Email=N'{vrItem["Email"]}',BirthDate=N'{dtBirth.ToString("yyyy-MM-dd")}',LastLoginDate=N'{dtLastLogin.ToString("yyyy-MM-dd hh:mm:ss.000")}' 
+                    where StudentId = {vrItem["StudentId"]}");
+
+            displayResult(irResult);
         }
     }
 }

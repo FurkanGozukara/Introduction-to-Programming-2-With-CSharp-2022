@@ -18,6 +18,8 @@
         <DatePicker x:Name="dateLogin" HorizontalAlignment="Left" Margin="464,103,0,0" VerticalAlignment="Top" Width="132"/>
         <Label Content="birth date" HorizontalAlignment="Left" Margin="30,151,0,0" VerticalAlignment="Top"/>
         <Label Content="login date" HorizontalAlignment="Left" Margin="247,102,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnDeleteSelected" Content="delete selected record" HorizontalAlignment="Left" Margin="709,153,0,0" VerticalAlignment="Top" Height="55" Width="154" Click="btnDeleteSelected_Click"/>
+        <Button x:Name="btnUpdateRecord" Content="update selected record" HorizontalAlignment="Left" Margin="709,228,0,0" VerticalAlignment="Top" Height="49" Width="154" Click="btnUpdateRecord_Click"/>
 
     </Grid>
 </Window>
