@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
+using System.Threading;
 
 namespace lecture_7
 {
@@ -24,6 +25,7 @@ namespace lecture_7
         public HashandDictionary()
         {
             InitializeComponent();
+            Debug.WriteLine($"main window thread id : {Thread.CurrentThread.ManagedThreadId}");
         }
 
         public class keysAndValues
@@ -236,7 +238,24 @@ namespace lecture_7
 
         private void btnSpeedtest_Click(object sender, RoutedEventArgs e)
         {
-            int irCounter = 10000000;
+
+            Debug.WriteLine($"btnSpeedtest_Click click thread id : {Thread.CurrentThread.ManagedThreadId}");
+
+            Task.Factory.StartNew(() => {
+
+                Debug.WriteLine($"inside of Task.Factory.StartNew: {Thread.CurrentThread.ManagedThreadId}");
+                doSpeedTask(); });
+
+
+        }
+
+       
+
+        private void doSpeedTask()
+        {
+            Debug.WriteLine($"doSpeedTask click thread id : {Thread.CurrentThread.ManagedThreadId}");
+
+            int irCounter = 30000;
 
             Stopwatch swTimer = new Stopwatch();
 
@@ -248,9 +267,8 @@ namespace lecture_7
 
             swTimer.Stop();
 
-            lstBoxResults.Items.Add("hashset unique adding took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
-
-
+            insertListBoxResult("hashset unique adding took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+     
             swTimer.Restart();
 
             for (int i = 0; i < irCounter; i++)
@@ -264,7 +282,7 @@ namespace lecture_7
 
             swTimer.Stop();
 
-            lstBoxResults.Items.Add("hashset searching took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+            insertListBoxResult("hashset searching took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
 
             hsUids = new HashSet<string>();
 
@@ -280,7 +298,7 @@ namespace lecture_7
 
             swTimer.Stop();
 
-            lstBoxResults.Items.Add("list unique adding took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+            insertListBoxResult("list unique adding took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
 
 
             swTimer.Restart();
@@ -296,10 +314,9 @@ namespace lecture_7
 
             swTimer.Stop();
 
-            lstBoxResults.Items.Add("list searching took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+            insertListBoxResult("list searching took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
 
-            lstBoxResults = new ListBox();
-
+            lstUids = new List<string>();
 
             swTimer.Restart();
 
@@ -312,7 +329,7 @@ namespace lecture_7
 
             swTimer.Stop();
 
-            lstBoxResults.Items.Add("dictionary unique adding took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+            insertListBoxResult("dictionary unique adding took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
 
             swTimer.Restart();
 
@@ -327,7 +344,15 @@ namespace lecture_7
 
             swTimer.Stop();
 
-            lstBoxResults.Items.Add("dictionary searching took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+            insertListBoxResult("dictionary searching took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+        }
+
+        private void insertListBoxResult(string srMsg)
+        {
+            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, () => {
+
+                lstBoxResults.Items.Add(srMsg);
+            });
         }
     }
 }
