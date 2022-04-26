@@ -9,6 +9,7 @@
     <Grid>
         <Button Name="btnTest" Content="test hashset dictionary list " HorizontalAlignment="Left" Margin="34,21,0,0" VerticalAlignment="Top" Height="81" Width="171" Click="btnTest_Click"/>
         <ListBox Name="lstBoxResults" Margin="253,21,10,20"/>
+        <Button Name="btnSpeedtest" Content="speed test" HorizontalAlignment="Left" Margin="34,151,0,0" VerticalAlignment="Top" Height="76" Width="171" Click="btnSpeedtest_Click"/>
 
     </Grid>
 </Window>

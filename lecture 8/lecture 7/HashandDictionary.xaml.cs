@@ -26,18 +26,34 @@ namespace lecture_7
             InitializeComponent();
         }
 
+        public class keysAndValues
+        {
+            public keysAndValues(string _srKey, double _dblValue)
+            {
+                srKey = _srKey;
+                dblValue= _dblValue;
+            }
+
+            public string srKey { get; set; }
+            public double dblValue { get; set; }
+        }
+
         Dictionary<string, double> dicTest = new Dictionary<string, double>();
         List<KeyValuePair<string, double>> listKeyValuePair = new List<KeyValuePair<string, double>>();
         List<Tuple<string, double>> listTuple = new List<Tuple<string, double>>();
         HashSet<KeyValuePair<string, double>> hashSetKeyValue = new HashSet<KeyValuePair<string, double>>();
 
+        List<keysAndValues> lstMyCustomClass = new List<keysAndValues>();
+
         private void btnTest_Click(object sender, RoutedEventArgs e)
         {
+            int irHowMany = 100000;
+
             Stopwatch swTimer = new Stopwatch();
 
             swTimer.Start();
 
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < irHowMany; i++)
             {
                 var vrUId = generateID();
                 if (!dicTest.ContainsKey(vrUId))
@@ -52,21 +68,121 @@ namespace lecture_7
 
             swTimer.Stop();
 
+            lstBoxResults.Items.Add("dictionary value generation took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+
             //stringOperations(dicTest);
 
-            for (int i = 0; i < 10000; i++)
+            swTimer.Restart();
+
+            for (int i = 0; i < irHowMany; i++)
             {
                 var vrUId = generateID();
 
-                if(listKeyValuePair.Where(kvp => kvp.Key == vrUId).Count() == 0)
+                if (listKeyValuePair.Where(kvp => kvp.Key == vrUId).Count() == 0)
                 {
                     listKeyValuePair.Add(new KeyValuePair<string, double>(vrUId, 1));
                 }
                 else
                 {
-                    //what would you write here
+                    for (int index_of_key = 0; index_of_key < listKeyValuePair.Count; index_of_key++)
+                    {
+                        if (listKeyValuePair[index_of_key].Key == vrUId)
+                            listKeyValuePair[index_of_key] = new KeyValuePair<string, double>(listKeyValuePair[index_of_key].Key, (listKeyValuePair[index_of_key].Value + 1));
+                    }
                 }
             }
+
+            swTimer.Stop();
+
+            lstBoxResults.Items.Add("listKeyValuePair value generation took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+
+
+            swTimer.Restart();
+
+            for (int i = 0; i < irHowMany; i++)
+            {
+                var vrUId = generateID();
+
+                if (listTuple.Where(kvp => kvp.Item1 == vrUId).Count() == 0)
+                {
+                    listTuple.Add(new Tuple<string, double>(vrUId, 1));
+                }
+                else
+                {
+                    for (int index_of_key = 0; index_of_key < listTuple.Count; index_of_key++)
+                    {
+                        if (listTuple[index_of_key].Item1 == vrUId)
+                            listTuple[index_of_key] = new Tuple<string, double>(vrUId, listTuple[index_of_key].Item2 + 1);
+                    }
+                }
+            }
+
+            swTimer.Stop();
+
+            lstBoxResults.Items.Add("listTuple value generation took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+
+
+            swTimer.Restart();
+
+            for (int i = 0; i < irHowMany; i++)
+            {
+                var vrUId = generateID();
+
+                if (lstMyCustomClass.Where(kvp => kvp.srKey == vrUId).Count() == 0)
+                {
+                    lstMyCustomClass.Add(new keysAndValues(vrUId,1));
+                }
+                else
+                {
+                    lstMyCustomClass.Where(pr => pr.srKey == vrUId).FirstOrDefault().dblValue++;
+                }
+            }
+
+            swTimer.Stop();
+
+            lstBoxResults.Items.Add("lstMyCustomClass value generation took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+
+            swTimer.Restart();
+
+            for (int i = 0; i < irHowMany; i++)
+            {
+                var vrUId = generateID();
+
+                bool blFound = false;
+
+                foreach (var vrPerValue in hashSetKeyValue)
+                {
+                    if(vrPerValue.Key==vrUId)
+                    {
+                        hashSetKeyValue.Remove(vrPerValue);
+                        hashSetKeyValue.Add(new KeyValuePair<string, double>(vrUId, (vrPerValue.Value+1)));
+                        blFound = true;
+                        break;
+                    }
+                }
+
+                if (blFound == false)
+                    hashSetKeyValue.Add(new KeyValuePair<string, double>(vrUId, 1));
+            }
+
+            swTimer.Stop();
+
+            lstBoxResults.Items.Add("hashSetKeyValue value generation took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+
+
+            writeListKeyValue(listKeyValuePair);
+        }
+
+        private void writeListKeyValue(List<KeyValuePair<string, double>> varList)
+        {
+            StringBuilder sbDictionary = new StringBuilder();
+
+            foreach (var vrPerItem in varList)
+            {
+                sbDictionary.AppendLine($"Key: {vrPerItem.Key} \t\t Value: {vrPerItem.Value}");
+            }
+
+            File.WriteAllText("list_key_Value.txt", sbDictionary.ToString());
         }
 
         private void stringOperations(Dictionary<string, double> dicTest)
@@ -75,7 +191,7 @@ namespace lecture_7
 
             dicTest = dicTest.OrderBy(kvp => kvp.Key).ToDictionary(pr => pr.Key, pr => pr.Value);
 
-            lstBoxResults.Items.Add("dictionary value generation took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+
 
             swTimer.Restart();
 
@@ -111,7 +227,107 @@ namespace lecture_7
         public string generateID()
         {
             var vrUId = Guid.NewGuid().ToString("N");
-            return vrUId.Substring(0, 4);
+            return vrUId.Substring(0, 20);
+        }
+
+        HashSet<string> hsUids = new HashSet<string>();
+        List<string> lstUids = new List<string>();
+        Dictionary<string, string> dicUids = new Dictionary<string, string>();
+
+        private void btnSpeedtest_Click(object sender, RoutedEventArgs e)
+        {
+            int irCounter = 10000000;
+
+            Stopwatch swTimer = new Stopwatch();
+
+            for (int i = 0; i < irCounter; i++)
+            {
+                var vrUid = generateID();
+                hsUids.Add(vrUid);
+            }
+
+            swTimer.Stop();
+
+            lstBoxResults.Items.Add("hashset unique adding took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+
+
+            swTimer.Restart();
+
+            for (int i = 0; i < irCounter; i++)
+            {
+                var vrUid = generateID();
+                if (hsUids.Contains(vrUid))
+                {
+                    vrUid = "1";
+                }
+            }
+
+            swTimer.Stop();
+
+            lstBoxResults.Items.Add("hashset searching took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+
+            hsUids = new HashSet<string>();
+
+            swTimer.Restart();
+
+            for (int i = 0; i < irCounter; i++)
+            {
+                var vrUid = generateID();
+                lstUids.Add(vrUid);
+            }
+
+            lstUids = lstUids.Distinct().ToList();
+
+            swTimer.Stop();
+
+            lstBoxResults.Items.Add("list unique adding took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+
+
+            swTimer.Restart();
+
+            for (int i = 0; i < irCounter; i++)
+            {
+                var vrUid = generateID();
+                if (lstUids.Contains(vrUid))
+                {
+                    vrUid = "1";
+                }
+            }
+
+            swTimer.Stop();
+
+            lstBoxResults.Items.Add("list searching took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+
+            lstBoxResults = new ListBox();
+
+
+            swTimer.Restart();
+
+            for (int i = 0; i < irCounter; i++)
+            {
+                var vrUid = generateID();
+                if (dicUids.ContainsKey(vrUid) == false)
+                    dicUids.Add(vrUid, null);
+            }
+
+            swTimer.Stop();
+
+            lstBoxResults.Items.Add("dictionary unique adding took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+
+            swTimer.Restart();
+
+            for (int i = 0; i < irCounter; i++)
+            {
+                var vrUid = generateID();
+                if (dicUids.ContainsKey(vrUid) == true)
+                {
+                    vrUid = "1";
+                }
+            }
+
+            swTimer.Stop();
+
+            lstBoxResults.Items.Add("dictionary searching took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
         }
     }
 }
