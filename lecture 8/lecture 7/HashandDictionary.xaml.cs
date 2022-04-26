@@ -37,7 +37,7 @@ namespace lecture_7
 
             swTimer.Start();
 
-            for (int i = 0; i < 100000; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 var vrUId = generateID();
                 if (!dicTest.ContainsKey(vrUId))
@@ -51,6 +51,29 @@ namespace lecture_7
             }
 
             swTimer.Stop();
+
+            //stringOperations(dicTest);
+
+            for (int i = 0; i < 10000; i++)
+            {
+                var vrUId = generateID();
+
+                if(listKeyValuePair.Where(kvp => kvp.Key == vrUId).Count() == 0)
+                {
+                    listKeyValuePair.Add(new KeyValuePair<string, double>(vrUId, 1));
+                }
+                else
+                {
+                    //what would you write here
+                }
+            }
+        }
+
+        private void stringOperations(Dictionary<string, double> dicTest)
+        {
+            Stopwatch swTimer = new Stopwatch();
+
+            dicTest = dicTest.OrderBy(kvp => kvp.Key).ToDictionary(pr => pr.Key, pr => pr.Value);
 
             lstBoxResults.Items.Add("dictionary value generation took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
 
@@ -75,7 +98,7 @@ namespace lecture_7
 
             foreach (var vrPerItem in dicTest)
             {
-                srResult = srResult + $"Key: {vrPerItem.Key} \t\t Value: {vrPerItem.Value}\r\n";
+                //   srResult = srResult + $"Key: {vrPerItem.Key} \t\t Value: {vrPerItem.Value}\r\n";
             }
 
             swTimer.Stop();
