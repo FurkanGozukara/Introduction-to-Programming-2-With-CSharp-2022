@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace lecture_7
 {
@@ -36,24 +37,58 @@ namespace lecture_7
 
             swTimer.Start();
 
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 100000; i++)
             {
                 var vrUId = generateID();
-                if(!dicTest.ContainsKey(vrUId))
+                if (!dicTest.ContainsKey(vrUId))
                 {
-                    dicTest.Add(vrUId,1);
+                    dicTest.Add(vrUId, 1);
                 }
                 else
                 {
                     dicTest[vrUId]++;
                 }
             }
+
+            swTimer.Stop();
+
+            lstBoxResults.Items.Add("dictionary value generation took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+
+            swTimer.Restart();
+
+            StringBuilder sbDictionary = new StringBuilder();
+
+            foreach (var vrPerItem in dicTest)
+            {
+                sbDictionary.AppendLine($"Key: {vrPerItem.Key} \t\t Value: {vrPerItem.Value}");
+            }
+
+            swTimer.Stop();
+
+            File.WriteAllText("dictionary_Values.txt", sbDictionary.ToString());
+
+            lstBoxResults.Items.Add("string buildier methodoloy took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
+
+            string srResult = "";
+
+            swTimer.Restart();
+
+            foreach (var vrPerItem in dicTest)
+            {
+                srResult = srResult + $"Key: {vrPerItem.Key} \t\t Value: {vrPerItem.Value}\r\n";
+            }
+
+            swTimer.Stop();
+
+            File.WriteAllText("dictionary_Values_string_method.txt", srResult);
+
+            lstBoxResults.Items.Add("string methodoloy took: " + swTimer.ElapsedMilliseconds.ToString("N0") + " miliseconds");
         }
 
         public string generateID()
         {
             var vrUId = Guid.NewGuid().ToString("N");
-            return vrUId.Substring(0,2);
+            return vrUId.Substring(0, 4);
         }
     }
 }
