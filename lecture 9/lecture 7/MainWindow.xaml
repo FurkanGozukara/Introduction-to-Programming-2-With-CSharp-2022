@@ -24,6 +24,9 @@
         <Button Content="open hashset window" Name="btnOpenHashSet" HorizontalAlignment="Left" Margin="852,35,0,0" VerticalAlignment="Top" Height="80" Width="130" Click="btnOpenHashSet_Click"/>
         <Label Name="lblProgress" Content="Label" HorizontalAlignment="Left" Margin="758,411,0,0" VerticalAlignment="Top" Width="224"/>
         <ComboBox Name="cbmPages" HorizontalAlignment="Left" Margin="218,216,0,0" VerticalAlignment="Top" Width="191" Height="22"/>
+        <Button Name="btnPrev" Content="prev" HorizontalAlignment="Left" Margin="348,262,0,0" VerticalAlignment="Top" Width="113" Click="btnPrev_Click"/>
+        <Button  Name="btnNext" Content="next" HorizontalAlignment="Left" Margin="573,262,0,0" VerticalAlignment="Top" Width="111" Click="btnNext_Click"/>
+        <Label Name="lblCurrentPage" Content="Label" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="466,259,0,0" VerticalAlignment="Top" Width="102"/>
 
     </Grid>
 </Window>

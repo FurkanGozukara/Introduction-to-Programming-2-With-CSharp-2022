@@ -48,6 +48,8 @@ namespace lecture_7
 
         int irCountOfPages;
 
+        int irPrevPageNumber, irNextPageNumber;
+
         private void refreshDataGrid()
         {
             int irSelectedIndex = cbmPages.SelectedIndex;
@@ -66,6 +68,14 @@ namespace lecture_7
 
             if (irCurrentRecordPage < 1)
                 irCurrentRecordPage = 1;
+
+            irPrevPageNumber = ((irCurrentRecordPage < 2) ? irCountOfPages : irCurrentRecordPage - 1);
+
+            irNextPageNumber = ((irCurrentRecordPage == irCountOfPages) ? 1 : irCurrentRecordPage + 1);
+
+            btnPrev.Content = "Goto Page: " + irPrevPageNumber;
+            btnNext.Content = "Goto Page: " + irNextPageNumber;
+            lblCurrentPage.Content = irCurrentRecordPage;
 
             string srQuery = $@"DECLARE @PageNumber AS INT
 DECLARE @RowsOfPage AS INT
@@ -263,6 +273,18 @@ FETCH NEXT @RowsOfPage ROWS ONLY";
         {
             HashandDictionary newWindow = new HashandDictionary();
             newWindow.Show();
+        }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+            cbmPages.SelectedIndex = irNextPageNumber-1;
+            refreshDataGrid();
+        }
+
+        private void btnPrev_Click(object sender, RoutedEventArgs e)
+        {
+            cbmPages.SelectedIndex = irPrevPageNumber-1;
+            refreshDataGrid();
         }
     }
 }

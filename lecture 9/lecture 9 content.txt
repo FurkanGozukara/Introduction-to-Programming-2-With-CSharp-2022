@@ -1,0 +1,14 @@
+In lecture 9
+How to write extension method
+How to do pagination properly
+How to batch insert into database
+What are database indexes and how to design an index
+How to generate unique index to ensure uniquness of a column values
+How to set idendity index and what does it do
+How to export MS SQL database as a script file
+How to use combobox for pagination
+How to load certain number of records into a datagrid and do pagination on datagrid
+How to use Tasks to prevent WPF main window freezing
+How to use dispatcher begin invoke to access main window elements from sub thread/task
+How to randomly generate student records and add them into the database as a batch
+How to use stringbuilder for batch query execution / insert new records
