@@ -137,20 +137,65 @@ namespace lecture_7
 
         private void btnRandomStudent_Click(object sender, RoutedEventArgs e)
         {
-            string srBaseQuery = "insert into tblStudents (StudentName,PhoneNumber,Email,BirthDate) values ('{0}','{1}','{2}','{3}')";
+            string srBaseQuery = "insert into tblStudents (StudentName,PhoneNumber,Email,BirthDate) values (N'{0}',N'{1}',N'{2}',N'{3}')";
 
-            for (int i = 0; i < 10000; i++)
+            HashSet<string> hsUsedEmails = new HashSet<string>();
+
+            for (int i = 0; i < 100000; i++)
             {
                 string srName = generateRandomName();
+                string srPhone = generateRandomPhoneNumber();
+                string srEmail = srName.Replace(" ", "_") + returnEmailProvider();
+                while(true)
+                {
+                    int irCounter = 0;
+                    if(hsUsedEmails.Contains(srEmail))
+                    {
+                        srEmail = srName.Replace(" ", "_")+ irCounter + returnEmailProvider();
+                        irCounter++;
+                    }
+                    else
+                    {
+                        hsUsedEmails.Add(srEmail);
+                        break;
+                    }
+                }
+                string srBirthDate = generateRandomBirthdate();
+
+                string srFormattedQuery=string.Format(srBaseQuery,srName,srPhone,srEmail,srBirthDate);
+
+                DbOperations.updateDeleteInsert(srFormattedQuery);
             }
         }
+
+        static List<string> lstProviders = new List<string> { "gmail", "outlook", "hotmail", "yahoo", "dmail", "yandex", "live" };
+
+        private static string returnEmailProvider()
+        {
+            return "@" + lstProviders[myRand.Next(0, lstProviders.Count)] + ".com";
+        }
+
 
         static List<string> lstFirstNames = new List<string>();
         static List<string> lstLastNames = new List<string>();
 
+        private static Random myRand = new Random();
+
         private static string generateRandomName()
         {
-            return lstFirstNames
+            return lstFirstNames[myRand.Next(0,lstFirstNames.Count)]+" "+ lstLastNames[myRand.Next(0, lstLastNames.Count)];
+        }
+
+        private static string generateRandomPhoneNumber()
+        {
+            //+90-5**-***-**-**
+            return $"+90-5{myRand.Next(0, 10)}{myRand.Next(0, 10)}-{myRand.Next(0, 10)}{myRand.Next(0, 10)}{myRand.Next(0, 10)}-{myRand.Next(0, 10)}{myRand.Next(0, 10)}-{myRand.Next(0, 10)}{myRand.Next(0, 10)}";
+        }
+
+        private static string generateRandomBirthdate()
+        {
+            //1900-12-12
+            return $"19{myRand.Next(0, 10)}{myRand.Next(0, 10)}-{myRand.Next(1, 13)}-{myRand.Next(0, 29)}";
         }
 
         private void btnOpenHashSet_Click(object sender, RoutedEventArgs e)
