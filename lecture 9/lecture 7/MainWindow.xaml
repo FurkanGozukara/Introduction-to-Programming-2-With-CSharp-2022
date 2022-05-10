@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lecture_7"
         mc:Ignorable="d"
-        Title="MainWindow" Height="602" Width="1002">
+        Title="MainWindow" Height="629" Width="1002">
     <Grid>
         <Button Content="load data into grid" Name="btnLoadDataGrid" HorizontalAlignment="Left" Margin="30,212,0,0" VerticalAlignment="Top" Height="51" Width="159" Click="btnLoadDataGrid_Click"/>
-        <DataGrid Name="dtStudents" Margin="30,293,187,42"/>
+        <DataGrid Name="dtStudents" Margin="30,293,291,44"/>
         <Button x:Name="btnSaveNewStudent" Content="save new student" HorizontalAlignment="Left" Margin="707,51,0,0" VerticalAlignment="Top" Height="92" Width="108" Click="btnSaveNewStudent_Click"/>
         <TextBox x:Name="txtStudentId" HorizontalAlignment="Left" Margin="30,58,0,0" TextWrapping="Wrap" Text="student id" VerticalAlignment="Top" Width="187" Height="23"/>
         <TextBox x:Name="txtStudentName" HorizontalAlignment="Left" Margin="247,58,0,0" TextWrapping="Wrap" Text="student name" VerticalAlignment="Top" Width="182" Height="23"/>
@@ -22,6 +22,8 @@
         <Button x:Name="btnUpdateRecord" Content="update selected record" HorizontalAlignment="Left" Margin="709,228,0,0" VerticalAlignment="Top" Height="49" Width="154" Click="btnUpdateRecord_Click"/>
         <Button Name="btnRandomStudent" Content="random student populate" HorizontalAlignment="Left" Margin="820,306,0,0" VerticalAlignment="Top" Height="62" Width="162" Click="btnRandomStudent_Click"/>
         <Button Content="open hashset window" Name="btnOpenHashSet" HorizontalAlignment="Left" Margin="852,35,0,0" VerticalAlignment="Top" Height="80" Width="130" Click="btnOpenHashSet_Click"/>
+        <Label Name="lblProgress" Content="Label" HorizontalAlignment="Left" Margin="758,411,0,0" VerticalAlignment="Top" Width="224"/>
+        <ComboBox Name="cbmPages" HorizontalAlignment="Left" Margin="218,216,0,0" VerticalAlignment="Top" Width="191" Height="22"/>
 
     </Grid>
 </Window>

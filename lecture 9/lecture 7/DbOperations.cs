@@ -61,5 +61,7 @@ namespace lecture_7
             File.AppendAllText("SQLerrors.txt", "SQL error: Query= " + srQuery + " Error: " + E?.Message + "\r\n" + E?.InnerException?.ToString() + "\r\n\r\n");
         }
 
+ 
+
     }
 }

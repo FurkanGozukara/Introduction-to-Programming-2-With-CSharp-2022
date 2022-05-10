@@ -44,9 +44,39 @@ namespace lecture_7
             refreshDataGrid();
         }
 
+        int irPageSize = 100;
+
+        int irCountOfPages;
+
         private void refreshDataGrid()
         {
-            DataTable dtData = DbOperations.selectTable("select * from tblStudents");
+            int irSelectedIndex = cbmPages.SelectedIndex;
+
+            int irRecordcount = DbOperations.selectTable("select COUNT (*) from tblStudents").Rows[0][0].ToString().toInt32();
+
+            irCountOfPages = irRecordcount / irPageSize + 1;
+
+            cbmPages.Items.Clear();
+            for (int i = 1; i < irCountOfPages+1; i++)
+            {
+                cbmPages.Items.Add("Page: " + i);
+            }
+            cbmPages.SelectedIndex = irSelectedIndex;
+            int irCurrentRecordPage = irSelectedIndex+1 ;
+
+            if (irCurrentRecordPage < 1)
+                irCurrentRecordPage = 1;
+
+            string srQuery = $@"DECLARE @PageNumber AS INT
+DECLARE @RowsOfPage AS INT
+SET @PageNumber={irCurrentRecordPage}
+SET @RowsOfPage={irPageSize}
+SELECT * FROM tblStudents
+ORDER BY StudentId 
+OFFSET (@PageNumber-1)*@RowsOfPage ROWS
+FETCH NEXT @RowsOfPage ROWS ONLY";
+
+            DataTable dtData = DbOperations.selectTable(srQuery);
 
             //for (int i = 0; i < dtData.Rows.Count; i++)
             //{
@@ -137,6 +167,11 @@ namespace lecture_7
 
         private void btnRandomStudent_Click(object sender, RoutedEventArgs e)
         {
+            Task.Factory.StartNew(() => { generateRandomStudents(); });
+        }
+
+        private void generateRandomStudents()
+        {
             string srBaseQuery = "insert into tblStudents (StudentName,PhoneNumber,Email,BirthDate) values (N'{0}',N'{1}',N'{2}',N'{3}')";
 
             HashSet<string> hsUsedEmails = new HashSet<string>();
@@ -184,6 +219,11 @@ namespace lecture_7
                     irCounter2 = 1;
                 }
                 irCounter2++;
+                Dispatcher.BeginInvoke((Action)(() =>
+                {
+                    lblProgress.Content = "so far processed student count: " + i.ToString("N0");
+                }));
+              
             }
 
             DbOperations.updateDeleteInsert(srQueries.ToString());

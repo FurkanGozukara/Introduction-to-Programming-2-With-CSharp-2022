@@ -1,0 +1,10 @@
+SQL error: Query= DECLARE @PageNumber AS INT
+DECLARE @RowsOfPage AS INT
+SET @PageNumber=0
+SET @RowsOfPage=2878
+SELECT * FROM tblStudents
+ORDER BY StudentId 
+OFFSET (@PageNumber-1)*@RowsOfPage ROWS
+FETCH NEXT @RowsOfPage ROWS ONLY Error: The offset specified in a OFFSET clause may not be negative.
+
+
