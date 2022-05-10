@@ -141,17 +141,26 @@ namespace lecture_7
 
             HashSet<string> hsUsedEmails = new HashSet<string>();
 
+            foreach (DataRow drw in DbOperations.selectTable("select Email from tblStudents").Rows)
+            {
+                hsUsedEmails.Add(drw[0].ToString());
+            }
+
+            StringBuilder srQueries = new StringBuilder();
+
+            int irCounter2 = 1;
+
             for (int i = 0; i < 100000; i++)
             {
                 string srName = generateRandomName();
                 string srPhone = generateRandomPhoneNumber();
                 string srEmail = srName.Replace(" ", "_") + returnEmailProvider();
-                while(true)
+                while (true)
                 {
                     int irCounter = 0;
-                    if(hsUsedEmails.Contains(srEmail))
+                    if (hsUsedEmails.Contains(srEmail))
                     {
-                        srEmail = srName.Replace(" ", "_")+ irCounter + returnEmailProvider();
+                        srEmail = srName.Replace(" ", "_") + irCounter + returnEmailProvider();
                         irCounter++;
                     }
                     else
@@ -162,10 +171,22 @@ namespace lecture_7
                 }
                 string srBirthDate = generateRandomBirthdate();
 
-                string srFormattedQuery=string.Format(srBaseQuery,srName,srPhone,srEmail,srBirthDate);
+                string srFormattedQuery = string.Format(srBaseQuery, srName, srPhone, srEmail, srBirthDate);
 
-                DbOperations.updateDeleteInsert(srFormattedQuery);
+                srQueries.Append(srFormattedQuery + ";");
+
+                //  DbOperations.updateDeleteInsert(srFormattedQuery);
+
+                if (irCounter2 > 250)
+                {
+                    DbOperations.updateDeleteInsert(srQueries.ToString());
+                    srQueries = new StringBuilder();
+                    irCounter2 = 1;
+                }
+                irCounter2++;
             }
+
+            DbOperations.updateDeleteInsert(srQueries.ToString());
         }
 
         static List<string> lstProviders = new List<string> { "gmail", "outlook", "hotmail", "yahoo", "dmail", "yandex", "live" };
@@ -183,7 +204,7 @@ namespace lecture_7
 
         private static string generateRandomName()
         {
-            return lstFirstNames[myRand.Next(0,lstFirstNames.Count)]+" "+ lstLastNames[myRand.Next(0, lstLastNames.Count)];
+            return lstFirstNames[myRand.Next(0, lstFirstNames.Count)] + " " + lstLastNames[myRand.Next(0, lstLastNames.Count)];
         }
 
         private static string generateRandomPhoneNumber()
@@ -195,7 +216,7 @@ namespace lecture_7
         private static string generateRandomBirthdate()
         {
             //1900-12-12
-            return $"19{myRand.Next(0, 10)}{myRand.Next(0, 10)}-{myRand.Next(1, 13)}-{myRand.Next(0, 29)}";
+            return $"19{myRand.Next(0, 10)}{myRand.Next(0, 10)}-{myRand.Next(1, 13)}-{myRand.Next(1, 29)}";
         }
 
         private void btnOpenHashSet_Click(object sender, RoutedEventArgs e)
