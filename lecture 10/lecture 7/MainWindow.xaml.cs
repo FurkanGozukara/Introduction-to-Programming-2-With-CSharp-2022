@@ -318,6 +318,7 @@ FETCH NEXT @RowsOfPage ROWS ONLY";
 
             string srUserHashedPassword = PublicMethods.ComputeSha256Hash(srUserSaltedPw);
 
+
         }
 
         private void btnPrev_Click(object sender, RoutedEventArgs e)
