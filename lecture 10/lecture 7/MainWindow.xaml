@@ -7,21 +7,27 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="629" Width="1002">
     <Grid>
-    
+
         <TabControl>
             <TabItem Header="Add Single Student">
                 <Grid Background="#FFE5E5E5">
                     <Button Content="load data into grid" Name="btnLoadDataGrid" HorizontalAlignment="Left" Margin="30,212,0,0" VerticalAlignment="Top" Height="51" Width="159" Click="btnLoadDataGrid_Click"/>
-                 
 
-                    <DataGrid Name="dtStudents" AutoGenerateColumns="False" Margin="30,310,312,28">
+
+                    <DataGrid Name="dtStudents" CanUserAddRows="False" AutoGenerateColumns="False" Margin="30,310,312,28">
                         <DataGrid.Columns>
-                            <DataGridTextColumn x:Name="StudentId" Header="Student Id" Binding="{Binding StudentId}"/>
+                            <DataGridTextColumn  IsReadOnly="True" x:Name="StudentId" Header="Student Id" Binding="{Binding StudentId}">
+
+                                <DataGridTextColumn.Foreground>
+                                    <SolidColorBrush Color="#FFF12222"></SolidColorBrush>
+                                </DataGridTextColumn.Foreground>
+
+                            </DataGridTextColumn>
                             <DataGridTextColumn x:Name="StudentName" Header="Student Name" Binding="{Binding StudentName}"/>
                             <DataGridTextColumn x:Name="PhoneNumber" Header="Phone Number" Binding="{Binding PhoneNumber}"/>
                             <DataGridTextColumn x:Name="Email" Header="Email" Binding="{Binding Email}"/>
                             <DataGridTextColumn x:Name="BirthDate" Header="Birth Date" Binding="{Binding BirthDate, StringFormat=dd/MM/yyyy}"/>
-                            <DataGridTextColumn x:Name="LastLoginDate" Header="Last Login Date" Binding="{Binding LastLoginDate}"/>
+                            <DataGridTextColumn  x:Name="LastLoginDate" Header="Last Login Date" Binding="{Binding LastLoginDate}"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -57,6 +63,20 @@
                 </Grid>
 
             </TabItem>
+
+            <TabItem Header="User Registration" Name="tabRegister">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox Name="txtUserName" HorizontalAlignment="Left" Margin="25,27,0,0" TextWrapping="Wrap" Text="user name"  VerticalAlignment="Top" Width="218" Height="25"/>
+                    <PasswordBox x:Name="pw1" Width="120" Margin="427,21,449,527"/>
+                    <Label Content="enter password" HorizontalAlignment="Left" Margin="331,26,0,0" VerticalAlignment="Top"/>
+                    <PasswordBox x:Name="pw2" Width="120" Margin="695,20,181,527"/>
+                    <Label Content="retype password" HorizontalAlignment="Left" Margin="593,26,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="txtRegisterEmail" HorizontalAlignment="Left" Margin="25,75,0,0" TextWrapping="Wrap" Text="email" VerticalAlignment="Top" Width="462" Height="29"/>
+                    <Button Content="Register" Name="btnRegister" HorizontalAlignment="Left" Margin="593,90,0,0" VerticalAlignment="Top" Height="67" Width="89" Click="btnRegister_Click"/>
+
+                </Grid>
+            </TabItem>
+
         </TabControl>
 
     </Grid>

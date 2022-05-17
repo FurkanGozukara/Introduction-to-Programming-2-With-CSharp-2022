@@ -457,9 +457,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Furkan Gözükara\\Desktop\\2022 advanced programming\\lecture 10\\lecture 7\\lecture 9.csproj",
-      "projectName": "lecture 9",
-      "projectPath": "C:\\Users\\Furkan Gözükara\\Desktop\\2022 advanced programming\\lecture 10\\lecture 7\\lecture 9.csproj",
+      "projectUniqueName": "C:\\Users\\Furkan Gözükara\\Desktop\\2022 advanced programming\\lecture 10\\lecture 7\\lecture 10.csproj",
+      "projectName": "lecture 10",
+      "projectPath": "C:\\Users\\Furkan Gözükara\\Desktop\\2022 advanced programming\\lecture 10\\lecture 7\\lecture 10.csproj",
       "packagesPath": "C:\\Users\\Furkan Gözükara\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Furkan Gözükara\\Desktop\\2022 advanced programming\\lecture 10\\lecture 7\\obj\\",
       "projectStyle": "PackageReference",

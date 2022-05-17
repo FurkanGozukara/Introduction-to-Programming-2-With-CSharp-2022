@@ -1,67 +1,268 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
+using System.Data.Sql;
 using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using System.Collections.Generic;
 
-namespace lecture_7
+public static class DbOperations
 {
-    public static class DbOperations
+    public static string srConnectionString = "server=localhost;database=School; integrated security=SSPI;persist security info=False; Trusted_Connection=Yes;";
+
+    public static DataSet db_Select_Query(string strQuery, bool blsetCommit = false)
     {
-        //to learn your server name execute this command select @@servername
-        private static string srConnectionString = @"server=DESKTOP-ULH4M26;database=School; integrated security=SSPI;persist security info=False; Trusted_Connection=Yes;";
+        //System.IO.File.AppendAllText(@"C:\temp\dbcon2.txt", strQuery + "\r\n\r\n");
 
-        public static DataTable selectTable(string srQuery)
+        DataSet dSet = new DataSet();
+        if (strQuery.Length < 5)
+            return dSet;
+
+        if (blsetCommit == true)
         {
-            DataTable dtReturnTable = new DataTable();
+            strQuery = "SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED " + Environment.NewLine + " " + strQuery;
+        }
+
+        try
+        {
+            using (SqlConnection connection = new SqlConnection(srConnectionString))
+            {
+                connection.Open();
+                using (SqlDataAdapter DA = new SqlDataAdapter(strQuery, connection))
+                {
+                    DA.Fill(dSet);
+                }
+            }
+            return dSet;
+        }
+        catch (Exception E)
+        {
+            insertIntoTblSqlErrors(strQuery + " " + E.Message.ToString());
+            return dSet;
+        }
+    }
+
+    public static DataTable selectTable(string strQuery, bool blsetCommit = false)
+    {
+        //System.IO.File.AppendAllText(@"C:\temp\dbcon.txt", strQuery + "\r\n\r\n");
+
+        DataTable dSet = new DataTable();
+        if (strQuery.Length < 5)
+            return dSet;
+
+        if (blsetCommit == true)
+        {
+            strQuery = "SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED " + Environment.NewLine + " " + strQuery;
+        }
+
+        try
+        {
+            using (SqlConnection connection = new SqlConnection(srConnectionString))
+            {
+                connection.Open();
+                using (SqlDataAdapter DA = new SqlDataAdapter(strQuery, connection))
+                {
+                    DA.Fill(dSet);
+                }
+            }
+            return dSet;
+        }
+        catch (Exception E)
+        {
+            insertIntoTblSqlErrors(strQuery + " " + E.Message.ToString());
+            return dSet;
+        }
+    }
+
+    public static DataRow db_Select_DataRow(string strQuery, bool blsetCommit = false)
+    {
+        //System.IO.File.AppendAllText(@"C:\temp\dbcon.txt", strQuery + "\r\n\r\n");
+
+        DataRow drw = null;
+        if (strQuery.Length < 5)
+            return drw;
+
+        if (blsetCommit == true)
+        {
+            strQuery = "SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED " + Environment.NewLine + " " + strQuery;
+        }
+
+        try
+        {
+            using (SqlConnection connection = new SqlConnection(srConnectionString))
+            {
+                connection.Open();
+                using (SqlDataAdapter DA = new SqlDataAdapter(strQuery, connection))
+                {
+                    using (DataTable drTemp = new DataTable())
+                    {
+                        DA.Fill(0, 1, drTemp);
+                        if (drTemp.Rows.Count > 0)
+                            drw = drTemp.Rows[0];
+                    }
+                }
+            }
+            return drw;
+        }
+        catch (Exception E)
+        {
+            insertIntoTblSqlErrors(strQuery + " " + E.Message.ToString());
+            return drw;
+        }
+    }
+
+    public static int updateDeleteInsert(string strQuery, bool blsetCommit = false, int irRetryCount = 1)
+    {
+        bool blResult = false;
+
+        for (int i = 0; i < irRetryCount; i++)
+        {
+            // System.IO.File.AppendAllText(@"C:\temp\dbcon2.txt", strQuery + "\r\n\r\n");
+
+            if (strQuery.Length < 5)
+                return 0;
+
+            //using (StreamWriter w = File.AppendText("c:\\log.txt"))
+            //{
+            //    w.WriteLine(strQuery);
+            //    w.Close();
+            //}
+
+            if (blsetCommit == true)
+            {
+                strQuery = "SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED " + Environment.NewLine + " " + strQuery;
+            }
+
             try
             {
                 using (SqlConnection connection = new SqlConnection(srConnectionString))
                 {
                     connection.Open();
-                    using (SqlDataAdapter DA = new SqlDataAdapter(srQuery, connection))
+                    using (SqlCommand command = new SqlCommand(strQuery, connection))
                     {
-                        DA.Fill(dtReturnTable);
+                      return  command.ExecuteNonQuery();
                     }
                 }
+
+                blResult = true;
+                break;
             }
             catch (Exception E)
             {
-                logSQLErrors(srQuery, E);
+                insertIntoTblSqlErrors(strQuery + " " + E.Message.ToString());
             }
 
-            return dtReturnTable;
+            System.Threading.Thread.Sleep(1000);
         }
 
-        public static int updateDeleteInsert(string srQuery)
+        return 0;
+    }
+
+    public static DataTable cmd_SelectQuery(string srCommandText, List<string> lstParameterNames, IList<object> lstParameters, bool blsetCommit = false)
+    {
+        //  System.IO.File.AppendAllText(@"C:\temp\dbcon2.txt", srCommandText + "\r\n\r\n");
+
+        if (blsetCommit == true)
         {
-            try
+            srCommandText = "SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED " + Environment.NewLine + " " + srCommandText;
+        }
+
+        DataTable dsCmdPara = new DataTable();
+        try
+        {
+            using (SqlConnection connection = new SqlConnection(DbOperations.srConnectionString))
             {
-                using (SqlConnection connection = new SqlConnection(srConnectionString))
+                using (SqlCommand cmd = new SqlCommand(srCommandText, connection))
                 {
-                    connection.Open();
-                    using (SqlCommand command = new SqlCommand(srQuery, connection))
+                    cmd.CommandType = CommandType.Text;
+                    for (int i = 0; i < lstParameterNames.Count; i++)
                     {
-                        return command.ExecuteNonQuery();//ExecuteNonQuery because we will not get any results , used for update delete and insert
+                        cmd.Parameters.AddWithValue(lstParameterNames[i], lstParameters[i].ToString());
+                    }
+                    using (SqlDataAdapter sqlDa = new SqlDataAdapter(cmd))
+                    {
+                        sqlDa.Fill(dsCmdPara);
+                        return dsCmdPara;
                     }
                 }
             }
-            catch (Exception E)
-            {
-                logSQLErrors(srQuery, E);
-            }
-            return -1;
         }
-
-        private static void logSQLErrors(string srQuery, Exception E)
+        catch (Exception E)
         {
-            File.AppendAllText("SQLerrors.txt", "SQL error: Query= " + srQuery + " Error: " + E?.Message + "\r\n" + E?.InnerException?.ToString() + "\r\n\r\n");
+            insertIntoTblSqlErrors(srCommandText + " " + E.Message.ToString());
+        }
+        return dsCmdPara;
+    }
+
+    public static bool cmd_UpdateDeleteQuery(string srCommandText, List<string> lstParameterNames, IList<object> lstParameters)
+    {
+        //   System.IO.File.AppendAllText(@"C:\temp\dbcon2.txt", srCommandText + "\r\n\r\n");
+
+        try
+        {
+            using (SqlConnection connection = new SqlConnection(DbOperations.srConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(srCommandText, connection))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    for (int i = 0; i < lstParameterNames.Count; i++)
+                    {
+                        cmd.Parameters.AddWithValue(lstParameterNames[i], lstParameters[i].ToString());
+                    }
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+            }
+        }
+        catch (Exception E)
+        {
+            insertIntoTblSqlErrors(srCommandText + " " + E.Message.ToString());
+        }
+        return false;
+    }
+
+    static string srCommandTextSqlError = " insert into tblSqlErrors values(@ErrorQueryString,@StackTrace) ";
+    private static void insertIntoTblSqlErrors(string srErrorQuery)
+    {
+        cmd_UpdateDeleteQuery(srCommandTextSqlError, new List<string> { "@ErrorQueryString", "@StackTrace" }, new List<object> { srErrorQuery, Environment.StackTrace.ToString() });
+    }
+
+    public static int rowsAffectedUpdate(string strQuery, bool blsetCommit = false)
+    {
+        int irAffected = 0;
+
+        // System.IO.File.AppendAllText(@"C:\temp\dbcon2.txt", strQuery + "\r\n\r\n");
+
+        if (strQuery.Length < 5)
+            return irAffected;
+
+        //using (StreamWriter w = File.AppendText("c:\\log.txt"))
+        //{
+        //    w.WriteLine(strQuery);
+        //    w.Close();
+        //}
+
+        if (blsetCommit == true)
+        {
+            strQuery = "SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED " + Environment.NewLine + " " + strQuery;
         }
 
- 
+        try
+        {
+            using (SqlConnection connection = new SqlConnection(srConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(strQuery, connection))
+                {
+                    irAffected = command.ExecuteNonQuery();
+                }
+            }
 
+            return irAffected;
+        }
+        catch (Exception E)
+        {
+            insertIntoTblSqlErrors(strQuery + " " + E.Message.ToString());
+            return irAffected;
+        }
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aE4SGcrq2IkxdU/CO3EzPaoZvJHojAi6PGsRXqxrfMGQAhSy5ixTbkIqsLUk9PPle5KW8/cMhvnUDwPpwrYf7w==",
+  "dgSpecHash": "/ZTFyZCQX8ekbryD/BQiNiLySWdaj6Usp8bYDvCkpltGDivj0nmWuWDwe4EYUWMf8KD8+J7H3efkY9xwrUyt0g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Furkan Gözükara\\Desktop\\2022 advanced programming\\lecture 10\\lecture 7\\lecture 9.csproj",
+  "projectFilePath": "C:\\Users\\Furkan Gözükara\\Desktop\\2022 advanced programming\\lecture 10\\lecture 7\\lecture 10.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Furkan Gözükara\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Furkan Gözükara\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
