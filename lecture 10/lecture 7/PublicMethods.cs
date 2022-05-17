@@ -54,6 +54,8 @@ namespace lecture_7
             //    return myResult;
             //}
 
+
+            //this is parameterized query and it is safe against sql injection
             string srCommand = "select 1 from tblUsers where UserName=@user_name_parameter";
 
             DataTable dtUsers = DbOperations.cmd_SelectQuery(srCommand, new List<string> { "@user_name_parameter" }, new List<object> { srUserName });
