@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace lecture_7
 {
@@ -68,6 +69,49 @@ namespace lecture_7
 
             myResult.blResult = true;
             return myResult;
+        }
+
+        private static checkResult checkEmail(string srEmail)
+        {
+            checkResult myResult = new checkResult();
+
+            var email = new EmailAddressAttribute();
+            if (email.IsValid(srEmail) == false)
+            {
+                myResult.srMsg = $"Your email is not a valid email address. Make sure that you have typed your email correctly!";
+                return myResult;
+            }
+
+            string srCommand = "select 1 from tblUsers where Email=@Email";
+
+            DataTable dtUsers = DbOperations.cmd_SelectQuery(srCommand, new List<string> { "@Email" }, new List<object> { srEmail });
+
+            if (dtUsers.Rows.Count > 0)
+            {
+                myResult.srMsg = $"This email is already being used";
+                return myResult;
+            }
+
+            myResult.blResult = true;
+            return myResult;
+        }
+
+        public static string ComputeSha256Hash(string rawData)
+        {
+            // Create a SHA256   
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convert byte array to a string   
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
         }
     }
 }

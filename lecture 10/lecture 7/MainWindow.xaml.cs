@@ -299,6 +299,25 @@ FETCH NEXT @RowsOfPage ROWS ONLY";
                 MessageBox.Show("Error: " + vrResult.srMsg);
                 return;
             }
+            vrResult = PublicMethods.checkUserName(txtRegisterEmail.Text);
+            if (vrResult.blResult == false)
+            {
+                MessageBox.Show("Error: " + vrResult.srMsg);
+                return;
+            }
+
+            if(pw1.Password.ToString()!=pw2.Password.ToString())
+            {
+                MessageBox.Show("Error: Entered passwords are not matching!");
+                return;
+            }
+
+            int irUserSalt = new Random().Next();
+
+            string srUserSaltedPw = pw1.Password.ToString() + irUserSalt;
+
+            string srUserHashedPassword = PublicMethods.ComputeSha256Hash(srUserSaltedPw);
+
         }
 
         private void btnPrev_Click(object sender, RoutedEventArgs e)
