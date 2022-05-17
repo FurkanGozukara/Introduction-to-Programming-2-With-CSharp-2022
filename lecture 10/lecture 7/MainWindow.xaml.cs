@@ -291,6 +291,16 @@ FETCH NEXT @RowsOfPage ROWS ONLY";
             DbOperations.updateDeleteInsert("DBCC CHECKIDENT(tblstudents, RESEED, 1)");
         }
 
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            var vrResult = PublicMethods.checkUserName(txtUserName.Text);
+            if(vrResult.blResult==false)
+            {
+                MessageBox.Show("Error: " + vrResult.srMsg);
+                return;
+            }
+        }
+
         private void btnPrev_Click(object sender, RoutedEventArgs e)
         {
             cbmPages.SelectedIndex = irPrevPageNumber-1;
