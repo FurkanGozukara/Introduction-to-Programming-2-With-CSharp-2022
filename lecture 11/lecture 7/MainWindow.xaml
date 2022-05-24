@@ -72,7 +72,8 @@
                     <PasswordBox x:Name="pw2" Width="120" Margin="695,20,181,527"/>
                     <Label Content="retype password" HorizontalAlignment="Left" Margin="593,26,0,0" VerticalAlignment="Top"/>
                     <TextBox Name="txtRegisterEmail" HorizontalAlignment="Left" Margin="25,75,0,0" TextWrapping="Wrap" Text="email" VerticalAlignment="Top" Width="462" Height="29"/>
-                    <Button Content="Register" Name="btnRegister" HorizontalAlignment="Left" Margin="593,90,0,0" VerticalAlignment="Top" Height="67" Width="89" Click="btnRegister_Click"/>
+                    <Button Content="Register" Name="btnRegister" HorizontalAlignment="Left" Margin="695,90,0,0" VerticalAlignment="Top" Height="66" Width="89" Click="btnRegister_Click"/>
+                    <ComboBox Name="cmbUserRanks" HorizontalAlignment="Left" Margin="447,134,0,0" VerticalAlignment="Top" Width="195"/>
 
                 </Grid>
             </TabItem>

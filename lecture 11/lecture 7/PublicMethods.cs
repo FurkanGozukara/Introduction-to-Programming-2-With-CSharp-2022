@@ -72,7 +72,7 @@ namespace lecture_7
             return myResult;
         }
 
-        private static checkResult checkEmail(string srEmail)
+        public static checkResult checkEmail(string srEmail)
         {
             checkResult myResult = new checkResult();
 

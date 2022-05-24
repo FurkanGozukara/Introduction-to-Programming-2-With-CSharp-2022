@@ -24,6 +24,30 @@ namespace lecture_7
     /// </summary>
     public partial class MainWindow : Window
     {
+        private class csUserRanks
+        {
+            public int irUserRankLevel { get; set; }
+            public string srUserRankDisplay { get; set; }
+        }
+
+        private void initRankComboBox()
+        {
+            List<csUserRanks> lstUserRanks = new List<csUserRanks> { };
+            lstUserRanks.Add(new csUserRanks { irUserRankLevel = 0, srUserRankDisplay = "Please Select User Rank" });
+
+            foreach (DataRow drw in DbOperations.selectTable("select * from tblUserRanks order by RankLevel asc").Rows)
+            {
+                lstUserRanks.Add(new csUserRanks { irUserRankLevel = Convert.ToInt32(drw["RankLevel"].ToString()), 
+                    srUserRankDisplay = drw["UserRankDisplayName"].ToString() });
+
+            }
+            cmbUserRanks.ItemsSource = lstUserRanks;
+            cmbUserRanks.DisplayMemberPath = "srUserRankDisplay";
+
+            cmbUserRanks.SelectedIndex = 0;
+        }
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -37,6 +61,8 @@ namespace lecture_7
 
             lstFirstNames = File.ReadAllLines("first-names.txt").ToList();
             lstLastNames = File.ReadAllLines("last-names.txt").ToList();
+
+            initRankComboBox();
         }
 
         private void btnLoadDataGrid_Click(object sender, RoutedEventArgs e)
@@ -299,10 +325,16 @@ FETCH NEXT @RowsOfPage ROWS ONLY";
                 MessageBox.Show("Error: " + vrResult.srMsg);
                 return;
             }
-            vrResult = PublicMethods.checkUserName(txtRegisterEmail.Text);
+            vrResult = PublicMethods.checkEmail(txtRegisterEmail.Text);
             if (vrResult.blResult == false)
             {
                 MessageBox.Show("Error: " + vrResult.srMsg);
+                return;
+            }
+
+            if(cmbUserRanks.SelectedIndex==0)
+            {
+                MessageBox.Show("Error: please pick a user rank");
                 return;
             }
 
@@ -318,8 +350,19 @@ FETCH NEXT @RowsOfPage ROWS ONLY";
 
             string srUserHashedPassword = PublicMethods.ComputeSha256Hash(srUserSaltedPw);
 
+            //write the final step save in database,
 
+            string srInsertCmd = $@"  insert into tblUsers (Username,Email,Password,UserRank,PwSalt)
+  values (@Username,@Email,@Password,@UserRank,@PwSalt)";
 
+            List<string> lstParameterNames = new List<string> {"@Username","@Email","@Password","@UserRank","@PwSalt"
+            };
+
+            List<object> lstValues = new List<object> { txtUserName.Text, txtRegisterEmail.Text, pw1.Password.ToString(), ((csUserRanks)cmbUserRanks.SelectedItem).irUserRankLevel, irUserSalt };
+
+          var vrRegisterResult=  DbOperations.cmd_UpdateDeleteQuery(srInsertCmd, lstParameterNames, lstValues);
+
+            MessageBox.Show("Registration result is " + vrRegisterResult.ToString());
 
         }
 
