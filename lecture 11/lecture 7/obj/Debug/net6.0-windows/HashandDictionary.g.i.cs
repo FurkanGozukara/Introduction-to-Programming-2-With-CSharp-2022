@@ -77,7 +77,7 @@ namespace lecture_7 {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/lecture 11;V1.0.0.0;component/hashanddictionary.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/lecture 11;component/hashanddictionary.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\HashandDictionary.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
