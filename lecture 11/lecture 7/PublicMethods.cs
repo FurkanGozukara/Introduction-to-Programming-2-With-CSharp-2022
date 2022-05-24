@@ -11,6 +11,10 @@ namespace lecture_7
 {
     internal class PublicMethods
     {
+        public static string loggedUserName = "";
+        public static string loggedUserRank = "0";
+
+
         public class checkResult
         {
             public bool blResult = false;
@@ -97,7 +101,12 @@ namespace lecture_7
             return myResult;
         }
 
-        public static string ComputeSha256Hash(string rawData)
+        public static string returnUserHashedPw(string srPwRaw, string srUserSalt)
+        {
+            return ComputeSha256Hash(srPwRaw + srUserSalt);
+        }
+
+        private static string ComputeSha256Hash(string rawData)
         {
             // Create a SHA256   
             using (SHA256 sha256Hash = SHA256.Create())
