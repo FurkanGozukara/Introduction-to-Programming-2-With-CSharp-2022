@@ -1,0 +1,14 @@
+#Software: Microsoft Internet Information Services 10.0
+#Version: 1.0
+#Date: 2018-10-16 07:07:22
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken
+2018-10-16 07:07:22 ::1 GET /Default.aspx - 44086 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/69.0.3497.100+Safari/537.36 - 301 0 0 12324
+2018-10-16 07:07:23 ::1 GET /Default - 44086 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/69.0.3497.100+Safari/537.36 - 200 0 0 1187
+2018-10-16 07:07:23 ::1 GET /Scripts/modernizr-2.8.3.js - 44086 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/69.0.3497.100+Safari/537.36 http://localhost:44086/Default 200 0 0 18
+2018-10-16 07:07:23 ::1 GET /Content/Site.css - 44086 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/69.0.3497.100+Safari/537.36 http://localhost:44086/Default 200 0 0 53
+2018-10-16 07:07:23 ::1 GET /Content/bootstrap.css - 44086 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/69.0.3497.100+Safari/537.36 http://localhost:44086/Default 200 0 0 60
+2018-10-16 07:07:23 ::1 GET /Scripts/jquery-3.3.1.js - 44086 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/69.0.3497.100+Safari/537.36 http://localhost:44086/Default 200 0 0 81
+2018-10-16 07:07:23 ::1 GET /Scripts/bootstrap.js - 44086 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/69.0.3497.100+Safari/537.36 http://localhost:44086/Default 200 0 0 108
+2018-10-16 07:07:23 ::1 GET /bundles/WebFormsJs v=N8tymL9KraMLGAMFuPycfH3pXe6uUlRXdhtYv8A_jUU1 44086 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/69.0.3497.100+Safari/537.36 http://localhost:44086/Default 200 0 0 152
+2018-10-16 07:07:23 ::1 GET /bundles/MsAjaxJs v=D6VN0fHlwFSIWjbVzi6mZyE9Ls-4LNrSSYVGRU46XF81 44086 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/69.0.3497.100+Safari/537.36 http://localhost:44086/Default 200 0 0 208
+2018-10-16 07:07:23 ::1 GET /favicon.ico - 44086 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/69.0.3497.100+Safari/537.36 http://localhost:44086/Default 200 0 0 2

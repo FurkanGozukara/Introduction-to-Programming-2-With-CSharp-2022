@@ -1,0 +1,8 @@
+In lecture 10
+How to add tabs
+How to add unique index
+How to write parameterized queries to prevent SQL injection
+How to validate user registration values
+What is the importance of database collation CI CA AI AS
+How to design columns manually generated datagrid and format output as wanted
+How to generate salted hashed password and why do we need hashed and salted hashed passwords
