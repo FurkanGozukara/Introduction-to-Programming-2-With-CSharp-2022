@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
+using System.IO;
 
 namespace lecture_7
 {
@@ -121,6 +122,34 @@ namespace lecture_7
                     builder.Append(bytes[i].ToString("x2"));
                 }
                 return builder.ToString();
+            }
+        }
+
+        public static void initBooks()
+        {
+            int ircounter = 0;
+            foreach (var vrLine in File.ReadLines("books.txt"))
+            {
+                if (vrLine.Length < 10)
+                    continue;
+
+                List<string> lstEachBookSeperated = vrLine.Split("$$$$$").ToList();
+                if (lstEachBookSeperated.Count < 3)
+                    continue;
+                string srWriter = lstEachBookSeperated[1].Trim();
+
+                string srBookName = lstEachBookSeperated[2].Trim();
+
+               DbOperations.cmd_UpdateDeleteQuery("if not exists ( select 1 from tblBooks where BookName=@BookName and Writer=@Writer ) insert into tblBooks (BookCategory,BookName,Writer) values (1,@BookName,@Writer)",
+                     new List<string> { "@BookName", "Writer" },
+                     new List<object> { srBookName, srWriter });
+
+                System.Threading.Thread.Sleep(1);
+                ircounter++;
+                MainWindow.runningWindow.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    MainWindow.runningWindow.lblBookAddstatus.Content = $"so far added book count is: {ircounter.ToString()}";
+                }));
             }
         }
     }

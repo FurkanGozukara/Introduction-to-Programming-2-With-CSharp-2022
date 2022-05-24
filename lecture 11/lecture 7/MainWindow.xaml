@@ -92,12 +92,20 @@
 
             <TabItem Header="Logged In" Name="tabLoggedIn">
                 <Grid Background="#FFE5E5E5">
+                    <Button Name="btnInitBooks" Content="init books" HorizontalAlignment="Left" Margin="535,25,0,0" VerticalAlignment="Top" Width="112" Click="btnInitBooks_Click"/>
+                    <Label Name="lblBookAddstatus" Content="status" HorizontalAlignment="Left" Margin="445,49,0,0" VerticalAlignment="Top"/>
+
+                    <TextBox Padding="5, 3, 5, 3"    
+         KeyUp="TextBox_KeyUp" Name="textBox" Margin="10,62,619,480" />
+                    <ScrollViewer Margin="10,120,276,83">
+                        <StackPanel Name="resultStack"></StackPanel>
+                    </ScrollViewer>
 
                 </Grid>
             </TabItem>
 
             <TabItem Header="Logout" Name="tabLogout" GotFocus="tabLogout_GotFocus">
-                
+
             </TabItem>
 
         </TabControl>

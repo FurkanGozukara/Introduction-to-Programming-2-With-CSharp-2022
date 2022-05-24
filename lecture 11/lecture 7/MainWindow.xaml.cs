@@ -24,6 +24,8 @@ namespace lecture_7
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow runningWindow;
+
         private class csUserRanks
         {
             public int irUserRankId { get; set; }
@@ -70,6 +72,8 @@ namespace lecture_7
 
             tabLoggedIn.IsEnabled = false;
             tabLogout.IsEnabled = false;
+
+            runningWindow = this;
         }
 
         private void btnLoadDataGrid_Click(object sender, RoutedEventArgs e)
@@ -424,10 +428,89 @@ FETCH NEXT @RowsOfPage ROWS ONLY";
             tabLogout.IsEnabled = false;
         }
 
+        private void btnInitBooks_Click(object sender, RoutedEventArgs e)
+        {
+            Task.Factory.StartNew(() => { PublicMethods.initBooks(); });
+        }
+
         private void btnPrev_Click(object sender, RoutedEventArgs e)
         {
             cbmPages.SelectedIndex = irPrevPageNumber - 1;
             refreshDataGrid();
+        }
+
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            bool found = false;
+            var border = (resultStack.Parent as ScrollViewer).Parent as Border;
+           
+
+            string query = (sender as TextBox).Text;
+
+            if (query.Length == 0)
+            {
+                // Clear   
+                resultStack.Children.Clear();
+                //border.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
+               // border.Visibility = System.Windows.Visibility.Visible;
+            }
+
+            // Clear the list   
+            resultStack.Children.Clear();
+
+            DataTable dtBooks = DbOperations.cmd_SelectQuery("select top 20 * from tblBooks where BookName like @BookName"
+                , new List<string> { "@BookName" },
+                new List<object> { $"{query}%" });
+
+            // Add the result   
+            foreach (DataRow  obj in dtBooks.Rows)
+            {
+         
+                    addItem(obj["BookName"].ToString()+"\t\t"+ obj["Writer"].ToString());
+                    found = true;
+               
+            }
+
+            if (!found)
+            {
+                resultStack.Children.Add(new TextBlock() { Text = "No results found." });
+            }
+        }
+
+        private void addItem(string text)
+        {
+            TextBlock block = new TextBlock();
+
+            // Add the text   
+            block.Text = text;
+
+            // A little style...   
+            block.Margin = new Thickness(2, 3, 2, 3);
+            block.Cursor = Cursors.Hand;
+
+            // Mouse events   
+            block.MouseLeftButtonUp += (sender, e) =>
+            {
+                textBox.Text = (sender as TextBlock).Text.Split('\t').FirstOrDefault();
+            };
+
+            block.MouseEnter += (sender, e) =>
+            {
+                TextBlock b = sender as TextBlock;
+                b.Background = Brushes.PeachPuff;
+            };
+
+            block.MouseLeave += (sender, e) =>
+            {
+                TextBlock b = sender as TextBlock;
+                b.Background = Brushes.Transparent;
+            };
+
+            // Add to the panel   
+            resultStack.Children.Add(block);
         }
     }
 }

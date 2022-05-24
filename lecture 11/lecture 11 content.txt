@@ -1,0 +1,13 @@
+Lecture 11 content
+
+How to enable, disable, set tabs
+How to register with salted password hashing
+How to login with salted password hashing
+How to keep logged in parameters in global variables
+How to logout
+How batch insert books / any data into the database
+How to use if not exists insert
+How to use parameterized queries for properly selecting, updating, deleting, inserting
+How to do auto complete search box in WPF
+How to see database executed queries even parameterized queries with SQL server profiler tool
+How to design multiple column including unique unclustered index
